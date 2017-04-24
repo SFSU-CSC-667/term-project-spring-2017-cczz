@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api/users', users);
+app.use('/api/messages', messages);
 
 
 // catch 404 and forward to error handler

@@ -1,5 +1,42 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  
+  p Welcome
+
+  #ranking-board     
+    .col-md-4            
+      h3 Score Board
+      
+      - var users = {title}    
+      for user in users
+        div.money= user[0]["money"]
+        div.money= user[1]["money"]
+        div.money= user[2]["money"]
+          
+          
+        
+        
+         
+  #game-room
+    .col-md-4      
+      h3 Game Board
+      - var rooms = ["Room 1","Room 2","Room 3","Room 4"]; 
+      div
+        for room in rooms
+          h3= room 
+          button.btn.btn-default(type='button') Join  
+          
+
+  #chat-board
+    .col-lg-4
+        .input-group
+          input.form-control(type='text', placeholder='Message...')
+          span.input-group-btn
+            button.btn.btn-default(type='button') Send
+
+  
+
+
+
+  	 

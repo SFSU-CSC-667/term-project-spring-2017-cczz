@@ -3,10 +3,18 @@ var router = express.Router();
 var db = require('../model');
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/', (request, response) => {
+
+  
   db.getAllUsers().then(function (data) {
-    res.status(200).send(data);
+  	   
+  	response.status(200).send(data);
+  	   
   })
+
+  
+
+
 });
 
 

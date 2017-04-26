@@ -12,8 +12,8 @@ var pgp = require('pg-promise')(options);
 var cn = {
     host: 'localhost',
     post: 5432,
-    database: 'xuanzhang',
-    user: 'xuanzhang',
+    database: 'postgres',
+    user: 'postgres',
     password: '123456'
 };
 

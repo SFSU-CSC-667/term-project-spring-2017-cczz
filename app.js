@@ -30,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api/users', users);
+app.use('/api/rooms', rooms);
 
 app.use('/api/rooms', rooms); 
 app.use('/api/rounds', rounds);

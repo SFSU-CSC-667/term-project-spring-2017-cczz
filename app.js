@@ -33,8 +33,8 @@ app.use('/api/users', users);
 app.use('/api/rooms', rooms);
 
 app.use('/api/rooms', rooms); 
-app.use('/api/rounds', rounds);
-app.use('/api/messages', messages);
+//app.use('/api/rounds', rounds);
+//app.use('/api/messages', messages);
 
 
 

@@ -13,7 +13,8 @@ var cn = {
     host: 'localhost',
     post: 5432,
     database: 'postgres',
-    user: 'postgres'
+    user: 'postgres',
+    password: '123456'
 };
 
 var db = pgp(cn);

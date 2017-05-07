@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dbcreate": "psql -U postgres_cczz_test -f ./db/cczzCreate.sql",
-    "dbinsert": "psql -U postgres_cczz_test -f ./db/cczzInsert.sql",
+    "start:dev": "DEBUG=cczz:* nodemon ./bin/www",
+    "dbcreate": "psql -U postgres -f ./db/cczzCreate.sql",
+    "dbinsert": "psql -U postgres -f ./db/cczzInsert.sql",
     "dbrestore": "psql -U postgres -f ./db/dumpydb.sql"
   },
   "dependencies": {
@@ -19,5 +20,12 @@
     "pug": "~2.0.0-beta11",
     "serve-favicon": "~2.4.2",
     "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "nodemon": "^1.11.0",
+    "watchify": "^3.7.0"
   }
 }

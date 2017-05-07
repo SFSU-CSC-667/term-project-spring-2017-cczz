@@ -1,4 +1,19 @@
+var $ = require('jquery')
+var socket = io();
+
+
+
 $(document).ready( () => {
+	
+
+	$('#chat-board button').click( function() {	
+		const message = $('.form-control').val()
+		socket.emit('message', message)		 
+	})
+
+	socket.on('message-display',function(data){
+		$('div.message-board').append(data) 
+	})
 	
 	$.get("/api/users", function(data, status){
     	
@@ -17,5 +32,6 @@ $(document).ready( () => {
 		}
 	})
 
+	
 })
 

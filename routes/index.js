@@ -4,14 +4,16 @@ var db = require('../model');
 
 
 /* GET home page. */
-router.get('/', ( request, response ) => {  
-	response.render( 'index' );
-    
+router.get('/', function (request, response) {
+  response.render('index');
+
+});
+
+router.get('/game', function (request, response) {
+  response.render('game');
+
 });
 
 
-
-
-
-module.exports = router
+module.exports = router;
 

@@ -10,8 +10,8 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var rooms = require('./routes/rooms'); 
-// var messages = require('./routes/messages'); 
-// var rounds = require('./routes/rounds'); 
+var messages = require('./routes/messages');
+var rounds = require('./routes/rounds');
 
 var app = express();
 
@@ -30,11 +30,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api/users', users);
+app.use('/api/rooms', rooms);
 app.use('/api/messages', messages);
-
-app.use('/api/rooms', rooms); 
 app.use('/api/rounds', rounds);
-app.use('/api/messages', messages);
+
 
 
 

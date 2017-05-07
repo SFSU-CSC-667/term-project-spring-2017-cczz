@@ -9,15 +9,11 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var rooms = require('./routes/rooms'); 
-<<<<<<< HEAD
+var rooms = require('./routes/rooms');
+var userprofile = require('./routes/userprofile');
 var messages = require('./routes/messages');
 var rounds = require('./routes/rounds');
-=======
-var userprofile = require('./routes/userprofile');
-// var messages = require('./routes/messages'); 
-// var rounds = require('./routes/rounds'); 
->>>>>>> a5fbf3cc805cefc5d62c99a0fefd43fff4ce41d6
+
 
 
 var app = express();
@@ -41,7 +37,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/api/users', users);
 app.use('/api/rooms', rooms);
-
+app.use('/api/userprofile', userprofile);
+//app.use('/api/messages', messages);
+//app.use('/api/rounds', rounds);
 
 
 // catch 404 and forward to error handler

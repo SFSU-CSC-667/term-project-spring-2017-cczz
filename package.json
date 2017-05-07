@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dbcreate": "psql -U postgres -f ./db/cczzCreate.sql",
-    "dbinsert": "psql -U postgres -f ./db/cczzInsert.sql",
+    "dbcreate": "psql -U postgres_cczz_test -f ./db/cczzCreate.sql",
+    "dbinsert": "psql -U postgres_cczz_test -f ./db/cczzInsert.sql",
     "dbrestore": "psql -U postgres -f ./db/dumpydb.sql"
   },
   "dependencies": {

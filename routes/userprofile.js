@@ -4,26 +4,28 @@ var db = require('../model');
 
 /* GET users listing. */
 
-router.get('/', (request, response) => {
+/*router.get('/', function (req, res, next) {
   db.getAllUsers().then(function (data) {   
-  	response.status(200).send(data);   
+  	//response.status(200).send(data); 
+  	res.render('userprofile');  
   })
 });
-
+*/
 
 /* GET a specific user id */
 router.get('/:id', function(req, res, next) {
 	db.getUserById(parseInt(req.params.id)).then(function(data) {
-		res.status(200).send(data);
+		//res.status(200).send(data);
+		res.render('userprofile', {userData: data});
 	})
 });
 
 /* create a user id */
-router.post('/', function(req, res, next) {
+/*router.post('/', function(req, res, next) {
 	db.createUser(req).then(function(data) {
 		res.status(200).send(data);
 	})
-})
+})*/
 
 
 module.exports = router;

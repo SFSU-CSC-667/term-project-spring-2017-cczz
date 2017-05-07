@@ -34,6 +34,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api/users', users);
+<<<<<<< HEAD
+=======
+app.use('/api/rooms', rooms);
+
+>>>>>>> 290a15c598330bfc05bcd1df02951ea85c268dfa
 app.use('/api/rooms', rooms); 
 // app.use('/api/rounds', rounds);
 // app.use('/api/messages', messages);

@@ -20,7 +20,8 @@ router.get('/:id', function(req, res, next) {
 
 /* create a user id */
 router.post('/', function(req, res, next) {
-	db.createUser(req).then(function(data) {
+	db.createUser(req.body.username, req.body.email, req.body.password, req.body.confirmPassword)
+	  .then(function(data) {
 		res.status(200).send(data);
 	})
 })

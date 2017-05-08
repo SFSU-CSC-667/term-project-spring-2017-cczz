@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+	center
+		table
+			tr
+				td
+					center
+						h1 Login Area
+			tr
+				td
+					h1 UserID:
+				td
+					form#login
+						input#id
+			tr
+				td
+					h1 Password:
+				td
+					input#pass
+
+			tr
+				td
+					center
+						input

@@ -11,6 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var rooms = require('./routes/rooms'); 
 var userprofile = require('./routes/userprofile');
+var register = require('./routes/register');
 // var messages = require('./routes/messages'); 
 // var rounds = require('./routes/rounds'); 
 
@@ -40,6 +41,7 @@ app.use('/api/rooms', rooms);
 // app.use('/api/rounds', rounds);
 // app.use('/api/messages', messages);
 app.use('/api/userprofile', userprofile);
+app.use('/api/register', register);
 
 
 

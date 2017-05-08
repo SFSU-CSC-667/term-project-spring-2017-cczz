@@ -1,0 +1,43 @@
+extends layout
+
+block content
+
+	center
+		table
+			tr
+				td
+					center
+						h1 Login Area
+
+			tr
+				td
+					h1 UserID:
+				td
+					form(name="login")
+						input(name="id" type="text")
+
+			tr
+				td
+					h1 Email:
+				td
+					input(name="email" type="text")
+
+			tr
+				td
+					h1 Password:
+				td
+					input(name="pass" type="password")
+
+			tr
+				td
+					h1 Confirm Password:
+				td
+					input(name="confirmPassord" type="password")
+
+			tr
+				td
+					center
+						input(type="button" value="Register")
+				td
+					center
+						input(type="Reset")

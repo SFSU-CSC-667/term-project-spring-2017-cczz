@@ -5,6 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "start:dev": "DEBUG=cczz:* nodemon ./bin/www",
+    "build": "browserify public/Javascripts/main.js -o public/Javascripts/bundle.js",
+    "build:dev": "watchify public/Javascripts/main.js -o public/javascripts/bundle.js",
     "dbcreate": "psql -U postgres -f ./db/cczzCreate.sql",
     "dbinsert": "psql -U postgres -f ./db/cczzInsert.sql",
     "dbrestore": "psql -U postgres -f ./db/dumpydb.sql"

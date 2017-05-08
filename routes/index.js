@@ -14,6 +14,10 @@ router.get('/game', function (request, response) {
 
 });
 
+router.get('/login', function (request, response) {
+  response.render('login');
+
+});
 
 module.exports = router;
 

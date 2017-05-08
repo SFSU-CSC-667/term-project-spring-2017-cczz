@@ -13,7 +13,7 @@ var rooms = require('./routes/rooms');
 var userprofile = require('./routes/userprofile');
 var messages = require('./routes/messages');
 var rounds = require('./routes/rounds');
-
+var auth = require('./routes/auth');
 
 
 var app = express();
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/api/users', users);
 app.use('/api/rooms', rooms);
-app.use('/api/userprofile', userprofile);
+app.use('/api/auth', auth);
 //app.use('/api/messages', messages);
 //app.use('/api/rounds', rounds);
 

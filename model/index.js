@@ -13,12 +13,8 @@ module.exports = {
   },
 
   createUser: function (req) {
-  	//console.log(username)
-  	//console.log(req.body.username);
-  	//return db.none('INSERT INTO users(username, email, password) VALUES (\'t2\', \'t2@h\', \'123\')');
   	return db.none('INSERT INTO users(username,email, password)' +
   	 'VALUES (${username}, ${email}, ${password})', req.body);
-  	 //return db.none('INSERT INTO users(username, email, password) VALUES ($1, $2, $3)', [username, email, password] );
   },
 
   getAllRooms: function () {

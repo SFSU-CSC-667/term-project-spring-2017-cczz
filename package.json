@@ -4,11 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-
     "build": "browserify public/javascripts/main.js -o public/javascripts/bundle.js",
-
     "start:dev": "DEBUG=cczz:* nodemon ./bin/www",
-
     "dbcreate": "psql -U postgres -f ./db/cczzCreate.sql",
     "dbinsert": "psql -U postgres -f ./db/cczzInsert.sql",
     "dbrestore": "psql -U postgres -f ./db/dumpydb.sql"
@@ -26,13 +23,8 @@
     "socket.io": "^1.7.3"
   },
   "devDependencies": {
-
-
     "babel-preset-es2015": "^6.18.0",
     "babelify": "^7.3.0",
-    "browserify": "^13.1.1",
-    "nodemon": "^1.11.0",
-    "watchify": "^3.7.0"
-
+    "browserify": "^14.3.0"   
   }
 }

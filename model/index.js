@@ -13,8 +13,9 @@ module.exports = {
   },
 
   createUser: function (req) {
-  	return db.none('INSERT INTO users(username,email, password)' +
+  	db.none('INSERT INTO users(username,email, password)' +
   	 'VALUES (${username}, ${email}, ${password})', req.body);
+    return db.one('SELECT * FROM users WHERE email = ${email}', req.body)
   },
 
   getAllRooms: function () {

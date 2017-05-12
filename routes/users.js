@@ -21,12 +21,9 @@ router.get('/:id', function(req, res, next) {
 /* create a user id */
 router.post('/', function(req, res, next) {
 	db.createUser(req)
-	  .then(function() {
-		res.status(200)
-			.json({
-				status: 'success',
-				message: 'Register Success'
-			})
+	  .then(function(data) {
+		res.cookie('email', data.email)
+		res.render('index')
 	})
 })
 

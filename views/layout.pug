@@ -13,10 +13,10 @@ html
      .container
        .navbar-header
          a.navbar-left(href='#') Logo
-         a.navbar-left(href='#') Lobby
+         a.navbar-left(href='/') Lobby
          a.navbar-left(href='#') Rule
        .profile
-         a.navbar-right(href='#') Login 
+         a.navbar-right(href='/login') Login
          a.navbar-right(href='#') Register
 
     
@@ -26,11 +26,11 @@ html
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.5.3/jquery.timeago.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
     
-    script(type='text/javascript')
-    
     script(src='/socket.io/socket.io.js')
     script(src='/javascripts/main.js')
     script(src='/javascripts/register.js')
+    script(src='/javascripts/bundle.js')
+
 
 
     	

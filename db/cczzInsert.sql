@@ -7,16 +7,7 @@ VALUES
 
 INSERT INTO rooms (id, dealer_pid, small_blind, player_amount)
 VALUES
-	(1,1,100,200)
-	(2,2,200,400)
-	(3,3,300,600)
-
-INSERT INTO rooms (small_blind)
-VALUES
-	('25'),
-	('5'),
-	('10'),
-	('20'),
-	('200'),
-	('500');
+	(1,1,100,200),
+	(2,2,200,400),
+	(3,3,300,600);
 

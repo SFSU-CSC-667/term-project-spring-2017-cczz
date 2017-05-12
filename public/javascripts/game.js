@@ -2,6 +2,9 @@
  * Created by Administrator on 5/5/2017.
  */
 
+var socket = io();
+const USER_JOINED = "user-joined";
+
 const tableInit = function (context) {
   var img = new Image();
   img.src = "/images/gametable.jpg";
@@ -25,10 +28,16 @@ const createInputButton = function (src) {
   const button = $('<input>').attr({
     type: 'image',
     class: 'game-button',
-    id: 'new game',
     src: src
   });
-  return button[0];
+
+  const form = $('<form>').attr({
+    id: 'new game',
+    class: 'game-form'
+  });
+  form.append(button);
+
+  return form[0];
 };
 
 
@@ -38,7 +47,13 @@ $(document).ready(function () {
       context.canvas.width = $(window).width();
       context.canvas.height = $(window).height();
       drawURLImg(context, "/images/card_back.gif", 10, 10, 2.5);
+
+      socket.emit(USER_JOINED,{roomid:"yes"});
+
       $('#canvas-container').append(createInputButton('/images/call.png'));
-      $('.game-button').on("submit",function(){alert("yes")});
+      $('.game-form').on("submit", function () {
+        socket.emit('message', {data: "helslo world1"});
+        return false; // prevent refresh
+      });
     }
 );

@@ -1,50 +1,50 @@
-var $ = require('jquery')
 var socket = io();
+const USER_JOINED = "user-joined";
+
+const listItem = function (data) {
+  const item = $('<a>').attr({
+    href: "/game",
+    class: "room-item list-group-item",
+    'data-roomid': data.id
+  });
+  const head = $('<h4>', {"class": "list-group-item-heading", html: "Room " + data.id});
+  const text = $('<div>', {"class": "list-group-item-text", html: JSON.stringify(data)});
+  item.append(head);
+  item.append(text);
+  return item[0];
+};
 
 
+$(document).ready(function () {
+  /*Fill the score board and room board*/
+  $.get("/api/rooms", function (data, status) {
+    for (var i = 0; i < data.length; i++) {
+      $('#rooms').append(listItem(data[i]));
+    }
+  });
 
-$(document).ready( () => {
-	
+  $.get("/api/users", function (data, status) {
+    for (var i = 0; i < data.length; i++) {
+      $('.score1').append(data[i].id);
+    }
+  });
 
-	$('#chat-board button').click( function() {	
-		const message = $('.form-control').val()
-		socket.emit('message', message)		 
-	})
+  /*Operation for joining room
+   * Store the room id in cookie*/
+  $('.room-item a').click(function () {
 
-	// const username = $('#username').val()
-	// socket.emit('userjoin',userjoin)
+  });
 
+  /*Operation for chatting button*/
+  $('#chat-board button').click(function () {
+    const message = $('.form-control').val();
+    socket.emit('message', {data: message});
+  });
 
-	//socket on the lobby page
-	socket.on('message-display',function(data){
-		$('div.message-board').append(data) 
-	})
+  //socket on the lobby page
+  socket.on('message-display', function (data) {
+    $('div.message-board').append(data);
+  });
 
-	//socket on the game page showing new user join the game
-	// socket.on('userupdate',function(data){
-	// 	$('#canvas-container').append(data)
-	// })
-
-	
-	$.get("/api/users", function(data, status){
-    	
-    	for( i = 0; i < data.length; i++) {
-    		$('.score1').append(data[i].money); 
-    		$('.score1').append("</br>"); 
-    	} 
-
-	})
-
-	$.get("/api/rooms", function(data, status){
-		// var r= $('<input type="button" value="new button"/>');
-		for( i = 0; i < data.length; i++){
-			var r= $('<input type="button" value="new button"/>');
-			// $('.room1').append(data[i].id).append(" ").append(data[i].small_blind); 
-			$('.room1').append(data[i].id).append(" ").append(" ").append(r); 
-			$('.room1').append("</br>"); 
-		}
-	})
-
-	
-})
+});
 

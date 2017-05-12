@@ -4,14 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
+// var passport = require('passport'); 
+// var LocalStrategy = require('passport-local').Strategy; 
+// var flash = require('connect-flash'); 
+var session = require('express-session'); 
+// require('./auth/passport.js')(passport); 
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var rooms = require('./routes/rooms'); 
+var rounds = require('./routes/rounds'); 
 // var messages = require('./routes/messages'); 
-// var rounds = require('./routes/rounds'); 
+
 
 
 var app = express();
@@ -31,13 +35,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 60000 }}))
+
 
 app.use('/', index);
 app.use('/api/users', users);
 app.use('/api/rooms', rooms);
-// app.use('/api/rounds', rounds);
+app.use('/api/rounds', rounds);
 // app.use('/api/messages', messages);
-
 
 
 // catch 404 and forward to error handler

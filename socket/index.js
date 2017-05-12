@@ -17,7 +17,7 @@ const init = ( app, server ) => {
     //socket listen on the lobby page to echo/display the message on the chat board 
     socket.on( 'message', data => io.emit( 'message-display', data ))
     //socket listen on the game page to new player join 
-    // socket.on( 'userjoin', data => io.emit('userupdate',data))
+    socket.on( 'userjoin', data => io.emit('userupdate',data))
   })
 }
 

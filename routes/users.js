@@ -18,6 +18,7 @@ router.get('/:id', function(req, res, next) {
 	})
 });
 
+
 /* create a user id */
 router.post('/', function(req, res, next) {
 	db.createUser(req).then(function(data) {

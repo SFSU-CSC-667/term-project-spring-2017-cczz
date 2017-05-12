@@ -1,7 +1,6 @@
-$(document).ready( () => {
-	
+
+$(document).ready( function() {
 	$.get("/api/users", function(data, status){
-    	
     	for( i = 0; i < data.length; i++) {
     		$('.score1').append(data[i].money); 
     		$('.score1').append("</br>"); 
@@ -16,6 +15,8 @@ $(document).ready( () => {
 			$('.room1').append("</br>"); 
 		}
 	})
+
+	
 
 })
 

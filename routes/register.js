@@ -4,7 +4,7 @@ var db = require('../model');
 
 
 /* GET home page. */
-router.get('/', ( request, response ) => {  
+router.get('/', ( request, response ) => { 
 	response.render( 'register' );
     
 });

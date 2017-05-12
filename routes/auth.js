@@ -8,7 +8,9 @@ router.post( '/', function( request, response, next ) {
   console.log( request.body.password );
 	db.verifyUserByEmailAndPassword( request.body.email, request.body.password )
 	  .then( function( data ) {
-  		response.status( 200 ).send( data );
+	    //request.session.user = request.body.email;
+	    response.cookie('email', request.body.email);
+      response.redirect('/game');
   	})
   	.catch( function( error ) {
   	  console.log( error );

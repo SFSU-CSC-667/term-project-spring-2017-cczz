@@ -10,6 +10,7 @@ router.get('/', function (request, response) {
 });
 
 router.get('/game', function (request, response) {
+  //console.log(request.session.user);
   response.render('game');
 
 });

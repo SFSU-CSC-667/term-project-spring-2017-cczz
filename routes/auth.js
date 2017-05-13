@@ -10,11 +10,13 @@ router.post( '/', function( request, response, next ) {
 	  .then( function( data ) {
 	    //request.session.user = request.body.email;
 	    response.cookie('email', request.body.email);
-      response.redirect('/game');
+      response.redirect('/lobby');
   	})
   	.catch( function( error ) {
   	  console.log( error );
+  	  response.redirect('/login');
   	  response.status( 200 ).send( "no matched email and password" );
+
   	})
 });
 

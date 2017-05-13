@@ -20,10 +20,15 @@ router.get('/:id', function(req, res, next) {
 
 /* create a user id */
 router.post('/', function(req, res, next) {
+	var email = req.body.email;
 	db.createUser(req)
-	  .then(function(data) {
-		res.cookie('email', data.email)
-		res.render('index')
+	  .then(function() {
+	  	db.getUserByEmail(email)
+	  	  .then(function(data) {
+	  	  	res.cookie('email', data.email)
+			res.render('index')
+	  	  })
+		
 	})
 })
 

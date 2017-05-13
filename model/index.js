@@ -13,9 +13,14 @@ module.exports = {
   },
 
   createUser: function (req) {
-  	db.none('INSERT INTO users(username,email, password)' +
+  	return db.none('INSERT INTO users(username,email, password)' +
   	 'VALUES (${username}, ${email}, ${password})', req.body);
-    return db.one('SELECT * FROM users WHERE email = $1', req.body.email)
+  },
+
+  getUserByEmail: function (email) {
+    var data = db.one('SELECT * FROM users WHERE email = $1', email);
+    console.log(data);
+    return data;
   },
 
   getAllRooms: function () {

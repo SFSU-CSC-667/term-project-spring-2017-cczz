@@ -1,5 +1,6 @@
-var socket = io();
+const ROOM_ID = 'room-id';
 const USER_JOINED = "user-joined";
+var socket = io();
 
 const listItem = function (data) {
   const item = $('<a>').attr({
@@ -7,8 +8,8 @@ const listItem = function (data) {
     class: "room-item list-group-item",
     'data-roomid': data.id
   });
-  const head = $('<h4>', {"class": "list-group-item-heading", html: "Room " + data.id});
-  const text = $('<div>', {"class": "list-group-item-text", html: JSON.stringify(data)});
+  const head = $('<h4>', {class: "list-group-item-heading", html: "Room " + data.id});
+  const text = $('<div>', {class: "list-group-item-text", html: JSON.stringify(data)});
   item.append(head);
   item.append(text);
   return item[0];
@@ -29,16 +30,16 @@ $(document).ready(function () {
     }
   });
 
-  /*Operation for joining room
-   * Store the room id in cookie*/
-  $('.room-item a').click(function () {
-
-  });
 
   /*Operation for chatting button*/
   $('#chat-board button').click(function () {
     const message = $('.form-control').val();
     socket.emit('message', {data: message});
+  });
+
+  /*Operation on join room*/
+  $('#rooms').on('click', 'a', function () {
+    $.cookie(ROOM_ID, $(this).attr("data-roomid"), {path: "/"});
   });
 
   //socket on the lobby page

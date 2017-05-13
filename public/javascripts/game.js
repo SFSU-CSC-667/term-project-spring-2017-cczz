@@ -1,9 +1,10 @@
 /**
  * Created by Administrator on 5/5/2017.
  */
+const USER_JOINED = "user-joined";
+const ROOM_ID = 'room-id';
 
 var socket = io();
-const USER_JOINED = "user-joined";
 
 const tableInit = function (context) {
   var img = new Image();
@@ -48,12 +49,19 @@ $(document).ready(function () {
       context.canvas.height = $(window).height();
       drawURLImg(context, "/images/card_back.gif", 10, 10, 2.5);
 
-      socket.emit(USER_JOINED,{roomid:"yes"});
 
       $('#canvas-container').append(createInputButton('/images/call.png'));
       $('.game-form').on("submit", function () {
         socket.emit('message', {data: "helslo world1"});
         return false; // prevent refresh
       });
+
+      var roomid = $.cookie(ROOM_ID);
+      socket.emit(USER_JOINED, {roomid: roomid});
+
+      socket.on(USER_JOINED, function (data) {
+        alert(data.msg);
+      });
+
     }
 );

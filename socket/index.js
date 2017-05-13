@@ -1,5 +1,7 @@
-const socketIo = require('socket.io');
+const ROOM_ID = 'room-id';
 const USER_JOINED = "user-joined";
+
+const socketIo = require('socket.io');
 
 const init = function (app, server) {
   const io = socketIo(server); // the websocket connection
@@ -11,9 +13,10 @@ const init = function (app, server) {
       console.log(data.data);
     });
 
-    socket.on('user-joined', function (data) {
-      console.log("joined");
-      //io.emit('message-display', data);
+    socket.on(USER_JOINED, function (data) {
+      console.log(data.roomid);
+      socket.join(data.roomid);
+      io.sockets.in(data.roomid).emit(USER_JOINED, {msg: "user join room:"+data.roomid});
     });
 
   })

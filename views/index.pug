@@ -2,30 +2,19 @@ extends layout
 
 block content
   
+  
   p Welcome
 
   #ranking-board     
     .col-md-4            
-      h3 Score Board
-      
-      - var users = {title}    
-      for user in users
-        div.money= user[0]["money"]
-        div.money= user[1]["money"]
-        div.money= user[2]["money"]
-          
-          
-        
-        
+      h3 Score Board      
+      div.score1       
          
   #game-room
     .col-md-4      
-      h3 Game Board
-      - var rooms = ["Room 1","Room 2","Room 3","Room 4"]; 
-      div
-        for room in rooms
-          h3= room 
-          button.btn.btn-default(type='button') Join  
+      h3 Game Board   
+      div.room1
+        
           
 
   #chat-board
@@ -34,9 +23,5 @@ block content
           input.form-control(type='text', placeholder='Message...')
           span.input-group-btn
             button.btn.btn-default(type='button') Send
-
-  
-
-
-
-  	 
+        .chat-display
+          div Here is the chat

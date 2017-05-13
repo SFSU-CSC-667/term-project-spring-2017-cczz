@@ -2,23 +2,25 @@
 -- Table user
 -- ----
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users
 (
   id       SERIAL PRIMARY KEY NOT NULL,
   username VARCHAR(255)       NOT NULL,
   email    VARCHAR(255)       NOT NULL,
   password VARCHAR(255)       NOT NULL,
-  money    INT DEFAULT 0      NOT NULL,
+  money    INT DEFAULT 100      NOT NULL,
   ranking  INT DEFAULT 0      NOT NULL,
   image_path VARCHAR(255) DEFAULT NULL
 );
 
 ALTER TABLE users
 ADD CONSTRAINT unique_id UNIQUE (id);
+ALTER TABLE users
+ADD CONSTRAINT unique_email UNIQUE (email);
 
 
-DROP TABLE IF EXISTS rooms;
+DROP TABLE IF EXISTS rooms CASCADE;
 CREATE TABLE rooms
 (
   id SERIAL PRIMARY KEY     NOT NULL,
@@ -27,7 +29,7 @@ CREATE TABLE rooms
   player_amount INT DEFAULT 1 NOT NULL
 );
 
-DROP TABLE IF EXISTS rounds;
+DROP TABLE IF EXISTS rounds CASCADE;
 CREATE TABLE rounds
 (
   id SERIAL PRIMARY KEY     NOT NULL,
@@ -38,7 +40,7 @@ CREATE TABLE rounds
   active_player_number  INT NOT NULL
 ); 
 
-DROP TABLE IF EXISTS messages; 
+DROP TABLE IF EXISTS messages CASCADE;
 CREATE TABLE messages
 (
   id SERIAL PRIMARY KEY     NOT NULL,

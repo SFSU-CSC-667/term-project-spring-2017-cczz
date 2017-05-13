@@ -10,7 +10,6 @@ VALUES
 	(2,2,200,400),
 	(3,3,300,600);
 
-
 INSERT INTO rounds (id, room_id, all_bet, current_bet, next_player, active_player_number)
 VALUES
 	(1, 1, 500, 10, 3, 4),

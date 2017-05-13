@@ -3,10 +3,9 @@ var router = express.Router();
 var db = require('../model');
 
 /* GET users listing. */
-
-router.get('/', (request, response) => {  
-  db.getAllUsers().then(function (data) { 	   
-  	response.status(200).send(data);  	   
+router.get('/', function (request, response){
+  db.getAllUsers().then(function (data) {   
+  	response.status(200).send(data);   
   })
 });
 
@@ -18,10 +17,18 @@ router.get('/:id', function(req, res, next) {
 	})
 });
 
-/* create a user id */
+
+/* create a user */
 router.post('/', function(req, res, next) {
-	db.createUser(req).then(function(data) {
-		res.status(200).send(data);
+	var email = req.body.email;
+	db.createUser(req)
+	  .then(function() {
+	  	db.getUserByEmail(email)
+	  	  .then(function(data) {
+	  	  	res.cookie('email', data.email)
+			res.render('index')
+	  	  })
+		
 	})
 });
 

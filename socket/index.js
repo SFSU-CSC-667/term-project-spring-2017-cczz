@@ -10,6 +10,7 @@ const init = function (app, server) {
 
   io.sockets.on('connection', function (socket) {
     socket.on('message', function (data) {
+      io.emit( 'message-display', data );
       console.log(data.data);
     });
 

@@ -46,6 +46,4 @@ $(document).ready(function () {
   socket.on('message-display', function (data) {
     $('div.message-board').append(data);
   });
-
 });
-

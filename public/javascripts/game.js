@@ -43,25 +43,45 @@ const createInputButton = function (src) {
 
 
 $(document).ready(function () {
-      var gameroomcanvas = $("#game-room");
-      var context = gameroomcanvas[0].getContext("2d");
-      context.canvas.width = $(window).width();
-      context.canvas.height = $(window).height();
-      drawURLImg(context, "/images/card_back.gif", 10, 10, 2.5);
+  var rawEmail = document.cookie;
+  var email = rawEmail.replace('%40', '@');
+  alert(email);
 
+  var gameroomcanvas = $("#game-room");
+  var context = gameroomcanvas[0].getContext("2d");
+  context.canvas.width = $(window).width();
+  context.canvas.height = $(window).height();
 
-      $('#canvas-container').append(createInputButton('/images/call.png'));
-      $('.game-form').on("submit", function () {
-        socket.emit('message', {data: "helslo world1"});
-        return false; // prevent refresh
-      });
+  drawURLImg(context, "/images/card_back.gif", 10, 150, 5);
+  drawURLImg(context, "/images/card_back.gif", 50, 150, 5);
+  drawURLImg(context, "/images/card_back.gif", 300, 30, 5);
+  drawURLImg(context, "/images/card_back.gif", 340, 30, 5);
+  drawURLImg(context, "/images/card_back.gif", 600, 150, 5);
+  drawURLImg(context, "/images/card_back.gif", 640, 150, 5);
+  drawURLImg(context, "/images/card_back.gif", 300, 300, 5);
+  drawURLImg(context, "/images/card_back.gif", 340, 300, 5);
 
-      var roomid = $.cookie(ROOM_ID);
-      socket.emit(USER_JOINED, {roomid: roomid});
+  context.font = "20px Arial";
+  context.fillText("Cheng", 40, 280);
+  context.fillText("1000", 40, 300);
+  context.fillText("Xinlu", 340, 160);
+  context.fillText("1000", 340, 180);
+  context.fillText("Lijie", 650, 280);
+  context.fillText("1000", 650, 300);
+  context.fillText("Xuan", 340, 430);
+  context.fillText("1000", 340, 450);
 
-      socket.on(USER_JOINED, function (data) {
-        alert(data.msg);
-      });
+  $('#canvas-container').append(createInputButton('/images/call.png'));
+  $('.game-form').on("submit", function () {
+    socket.emit('message', {data: "helslo world1"});
+    return false; // prevent refresh
+  });
 
-    }
-);
+  var roomid = $.cookie(ROOM_ID);
+  socket.emit(USER_JOINED, {roomid: roomid});
+
+  socket.on(USER_JOINED, function (data) {
+    alert(data.msg);
+  });
+
+});

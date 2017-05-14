@@ -17,8 +17,9 @@ var rooms = require('./routes/rooms');
 var rounds = require('./routes/rounds'); 
 var messages = require('./routes/messages');
 var auth = require('./routes/auth');
-
-
+var login = require('./routes/login');
+var lobby = require('./routes/lobby');
+var game = require('./routes/game');
 
 var app = express();
 
@@ -36,17 +37,29 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: "Secret Key!", cookie: {secure: false}}));
+//app.use(session({secret: "Secret Key!", cookie: {secure: false}}));
 
-app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 60000 }}))
-
+app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 600000 }}))
 
 app.use('/', index);
+app.use('/login', login);
+app.use('/api/auth', auth);
+
+app.use(function (req, res, next) {
+  if (!req.session.user_id) {
+      res.send('You are not authorized to view this page');
+    } else {
+      next();
+    }
+});
+
+app.use('/lobby', lobby);
+app.use('/game', game);
 app.use('/api/users', users);
 app.use('/api/rooms', rooms);
-app.use('/api/auth', auth);
 app.use('/api/rounds', rounds);
 app.use('/api/messages', messages);
+
 
 
 // catch 404 and forward to error handler

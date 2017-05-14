@@ -15,8 +15,8 @@ html
          a.navbar-left(href='/lobby') Lobby
          a.navbar-left(href='#') Rule
        .profile
-         a.navbar-brand(href='#') Login
-         a.navbar-brand(href='#') Register
+         a.navbar-brand(href='/login') Login
+         a.navbar-brand(href='/api/register') Register
 
     block content
 
@@ -27,5 +27,3 @@ html
     script(src='/socket.io/socket.io.js')
     script(src='/javascripts/main.js')
     script(src='/javascripts/register.js')
-
-      

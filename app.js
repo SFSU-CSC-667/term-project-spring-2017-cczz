@@ -44,17 +44,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: "Secret Key!", cookie: {secure: false}})); //todo check
 app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 60000 }})); //todo check
 
-app.use('/', index);
+app.use('/', lobby);
 app.use('/login', login);
 app.use('/api/auth', auth);
 
-app.use(function (req, res, next) {
+/*app.use(function (req, res, next) {
   if (!req.session.user_id) {
       res.redirect('/login');
     } else {
       next();
     }
-});
+});*/
 
 app.use('/lobby', lobby);
 app.use('/game', game);

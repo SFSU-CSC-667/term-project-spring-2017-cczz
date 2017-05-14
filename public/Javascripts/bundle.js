@@ -4,7 +4,7 @@ var socket = io();
 
 
 
-$(document).ready( () => {
+$(document).ready( function () {
 	
 
 	$('#chat-board button').click( function() {	

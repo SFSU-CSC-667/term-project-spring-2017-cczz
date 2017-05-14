@@ -19,3 +19,11 @@ INSERT INTO messages (id, user_id, message_timestamp, content, room_id)
 VALUES
 	(1, 1, NOW(), 'hello', 1);
 
+
+INSERT INTO roomplayers (user_id, room_id, round_id, position_id, bet, state, is_fold)
+VALUES
+    (1,1,1,1,100,'fold', TRUE);
+
+INSERT INTO roundcards (id, round_id, card_id, user_id, is_faceup)
+VALUES
+(1, 1, 5, 1, FALSE);

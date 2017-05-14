@@ -50,7 +50,7 @@ app.use('/api/auth', auth);
 
 app.use(function (req, res, next) {
   if (!req.session.user_id) {
-      res.send('You are not authorized to view this page');
+      res.redirect('/login');
     } else {
       next();
     }

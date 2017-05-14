@@ -8,8 +8,9 @@ router.post( '/', function( request, response, next ) {
   console.log( request.body.password );
 	db.verifyUserByEmailAndPassword( request.body.email, request.body.password )
 	  .then( function( data ) {
-	    request.session.user_id = request.body.email;
-	    response.cookie('email', request.body.email);
+	    request.session.user_id = data.email;
+	    response.cookie('email', data.email);
+	    response.cookie('user_id', data.id);
       response.redirect('/lobby');
   	})
   	.catch( function( error ) {

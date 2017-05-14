@@ -6,7 +6,7 @@ block content
       br
       .col-md-6.col-md-offset-3
         h1.display-4.m-b-2 Register
-        form(method='POST' action='/api/users')
+        form(name="register" action="/api/users" onsubmit="return validateRegisterForm()" method="post")
           div.form-group
             label(for='username') Username
             input.form-control#username(type='text' placeholder='Username' name='username')
@@ -17,7 +17,7 @@ block content
             label(for='password') Password
             input.form-control#password(type='password' placeholder='Password' name='password')
           div.form-group
-            label(for='password') Confirm Password
+            label(for='confirmPassword') Confirm Password
             input.form-control#confirmPassword(type='password' placeholder='Confirm Password' name='confirmPassword')
           button#registerButton.btn.btn-primary(type='submit') Register
           br

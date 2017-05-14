@@ -13,13 +13,17 @@ var session = require('express-session');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var rooms = require('./routes/rooms'); 
-var rounds = require('./routes/rounds'); 
-var messages = require('./routes/messages');
+
+var rooms = require('./routes/rooms');
+var userprofile = require('./routes/userprofile');
+var register = require('./routes/register');
+var rounds = require('./routes/rounds');
 var auth = require('./routes/auth');
 var login = require('./routes/login');
 var lobby = require('./routes/lobby');
 var game = require('./routes/game');
+var messages = require('./routes/messages');
+
 
 var app = express();
 
@@ -37,9 +41,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(session({secret: "Secret Key!", cookie: {secure: false}}));
-
-app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 600000 }}))
+app.use(session({secret: "Secret Key!", cookie: {secure: false}})); //todo check
+app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 60000 }})); //todo check
 
 app.use('/', index);
 app.use('/login', login);
@@ -57,6 +60,8 @@ app.use('/lobby', lobby);
 app.use('/game', game);
 app.use('/api/users', users);
 app.use('/api/rooms', rooms);
+app.use('/api/userprofile', userprofile);
+app.use('/api/register', register);
 app.use('/api/rounds', rounds);
 app.use('/api/messages', messages);
 

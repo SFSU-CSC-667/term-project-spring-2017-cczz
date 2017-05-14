@@ -1,24 +1,26 @@
-const socketIo = require( 'socket.io' )
+const ROOM_ID = 'room-id';
+const USER_JOINED = "user-joined";
 
+const socketIo = require('socket.io');
 
-const init = ( app, server ) => {
-  const io = socketIo( server )
+const init = function (app, server) {
+  const io = socketIo(server); // the websocket connection
 
-  app.set( 'io', io )
+  //app.set('io', io);//useless
 
-  io.on( 'connection', socket => {
-    console.log('hello');
-    console.log( 'client connected' )
+  io.sockets.on('connection', function (socket) {
+    socket.on('message', function (data) {
+      io.emit( 'message-display', data );
+      console.log(data.data);
+    });
 
-    socket.on( 'disconnect', data => {
-      console.log( 'client disconnected' )
-    })
+    socket.on(USER_JOINED, function (data) {
+      console.log(data.roomid);
+      socket.join(data.roomid);
+      io.sockets.in(data.roomid).emit(USER_JOINED, {msg: "user join room:"+data.roomid});
+    });
 
-    //socket listen on the lobby page to echo/display the message on the chat board 
-    socket.on( 'message', data => io.emit( 'message-display', data ))
-    //socket listen on the game page to new player join 
-    socket.on( 'userjoin', data => io.emit('userupdate',data))
   })
-}
+};
 
-module.exports = { init }
+module.exports = {init: init};

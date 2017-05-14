@@ -1,38 +1,23 @@
 extends layout
 
 block content
-      
-  p Welcome
+  h2
+  .container.lobby-body
+    .row
+      #ranking-board.col-md-4
+        h3 Score Board
+        .score1
 
-  #ranking-board     
-    .col-md-4            
-      h3 Score Board      
-      div.score1       
-         
-  #game-room
-    .col-md-4      
-      h3 Game Board   
-      div.room1
-      
-        
-          
+      #game-room.col-md-4
+        h3 Game Board
+        #rooms.list-group
 
-  #chat-board
-    .col-lg-4
+
+      #chat-board.col-md-4
+        h3 Chat Board
+        .display-message.well.well-sm
+           .message-board This is posted message
         .input-group
-          input.form-control(type='text', placeholder='Message...')
-          span.input-group-btn
-            button.btn.btn-default(type='button') Send
-        .display-message
-          div.message-board This is posted message
-
-
-          
-
-
-
-  
-
-
-
-  	 
+           input.form-control(type='text', placeholder='Message...')
+           span.input-group-btn
+           button.btn.btn-default(type='button') Send

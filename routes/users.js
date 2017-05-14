@@ -3,8 +3,7 @@ var router = express.Router();
 var db = require('../model');
 
 /* GET users listing. */
-
-router.get('/', (request, response) => {
+router.get('/', function (request, response){
   db.getAllUsers().then(function (data) {   
   	response.status(200).send(data);   
   })
@@ -18,7 +17,8 @@ router.get('/:id', function(req, res, next) {
 	})
 });
 
-/* create a user id */
+
+/* create a user */
 router.post('/', function(req, res, next) {
 	var email = req.body.email;
 	db.createUser(req)
@@ -30,11 +30,9 @@ router.post('/', function(req, res, next) {
 	  	  })
 		
 	})
-	  .catch(function(error) {
-	  	console.log(error);
-	  	res.status(200).send(error);
-	  })
-})
+
+	  
+});
 
 
 module.exports = router;

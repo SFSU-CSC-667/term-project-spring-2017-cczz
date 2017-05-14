@@ -29,8 +29,8 @@ module.exports = {
   },
 
   createUser: function (req) {
-    return db.none('INSERT INTO users(username,email, password)' +
-        'VALUES (${username}, ${email}, ${password})', req.body);
+    return db.one('INSERT INTO users(username,email, password)' +
+        'VALUES (${username}, ${email}, ${password}) Returning ${email}', req.body);
   },
 
   verifyUserByEmailAndPassword: function ( email, password ) {

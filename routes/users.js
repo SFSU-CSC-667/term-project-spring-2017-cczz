@@ -30,6 +30,10 @@ router.post('/', function(req, res, next) {
 	  	  })
 		
 	})
+	  .catch(function(error) {
+	  	console.log(error);
+	  	res.status(200).send(error);
+	  })
 })
 
 

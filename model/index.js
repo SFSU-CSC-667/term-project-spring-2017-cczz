@@ -53,7 +53,7 @@ module.exports = {
   	return db.one('INSERT INTO rooms(dealer_pid, small_blind) VALUES ($1, $2) RETURNING id', [dealer_pid, small_blind]);
   },
 
-  // WARNING: THIS METHOD MAY NEED TO BE CHANGED. PAY ATTENTION WHEN USING IT. 
+  // WARNING: THIS METHOD MAY NEED TO BE CHANGED. PAY ATTENTION WHEN USING IT. PLEASE DON'T FORGET TO CLEAN IT UP BEFORE STARTING THE NEXT ROUNDS.
   createRoomPlayers: function(user_id, room_id, round_id, position_id, bet, state, is_fold) {
   	return db.none ('INSERT INTO roomplayers(user_id, room_id, round_id, position_id, bet, state, is_fold) VALUES ($1, $2, $3, $4, $5, $6, $7)', [user_id, room_id, round_id, position_id, bet, state, is_fold]);
   },

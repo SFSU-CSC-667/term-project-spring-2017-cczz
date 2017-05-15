@@ -40,6 +40,19 @@ CREATE TABLE rounds
   active_player_number  INT NOT NULL
 ); 
 
+DROP TABLE IF EXISTS roomplayers CASCADE;
+CREATE TABLE roomplayers
+(
+  user_id INT references users(id) NOT NULL,
+  room_id INT references rooms(id) NOT NULL,
+  round_id INT references rounds(id) NOT NULL,
+  position_id INT NOT NULL CHECK (position_id >= 1 AND position_id <= 4),
+  bet INT NOT NULL,
+  state ENUM(255) NOT NULL,
+  is_fold TINYINT(255) NOT NULL,
+  PRIMARY KEY (user_id, room_id)
+); 
+
 DROP TABLE IF EXISTS messages CASCADE;
 CREATE TABLE messages
 (

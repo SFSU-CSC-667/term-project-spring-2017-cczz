@@ -130,7 +130,7 @@ $(document).ready(function () {
   /*User Join room*/
   var roomid = $.cookie(ROOM_ID);
   socket.emit(USER_JOINED, {roomid: roomid});
-
+ 
   socket.on(USER_JOINED, function (data) {
     //alert(data.msg);
   });
@@ -141,6 +141,30 @@ $(document).ready(function () {
     socket.emit('message', {data: "helslo world1"});
     return false; // prevent refresh
   });
+
+  /* Room message posted */
+  $('#chat-input button').click(function () {
+    const message = $('.room-form-control').val();
+    // console.log(message);
+    // var username = $.cookie(username); 
+    socket.emit('room-message', {roomid: roomid}); 
+    socket.emit('room-message', {data: message});
+  });
+
+  //socket on the game page
+  var username = $.cookie('email');
+  // console.log(username);
+  socket.on('room-message-display', function (data) {
+    $('div#room-chat-board').append('<div>').append(data.data);
+    // alert(data.data);
+    // alert(data.roomid);
+  });
+
+  //Clear input after submission
+  $('button.btn.btn-default').click(function(){
+    $('input.room-form-control').val(''); 
+  });
+  
 
 
 

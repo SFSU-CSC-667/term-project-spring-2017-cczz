@@ -6,7 +6,7 @@ var socket = io();
 
 const listItem = function (data,title) {
   const item = $('<a>').attr({
-    href: "/game",
+    href: "/api/game",
     class: "room-item list-group-item",
     'data-roomid': data.id
   });

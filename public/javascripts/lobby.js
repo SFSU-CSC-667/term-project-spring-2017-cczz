@@ -4,13 +4,13 @@ const ROOM_CREATED = "room-created";
 
 var socket = io();
 
-const listItem = function (data) {
+const listItem = function (data,title) {
   const item = $('<a>').attr({
     href: "/game",
     class: "room-item list-group-item",
     'data-roomid': data.id
   });
-  const head = $('<h4>', {class: "list-group-item-heading", html: "Room " + data.id});
+  const head = $('<h4>', {class: "list-group-item-heading", html: title + data.id});
   const text = $('<div>', {class: "list-group-item-text", html: JSON.stringify(data)});
   item.append(head);
   item.append(text);
@@ -22,13 +22,13 @@ $(document).ready(function () {
   /*Fill the score board and room board*/
   $.get("/api/rooms", function (data, status) {
     for (var i = 0; i < data.length; i++) {
-      $('#rooms').append(listItem(data[i]));
+      $('#rooms').append(listItem(data[i],"Room: "));
     }
   });
 
   $.get("/api/users", function (data, status) {
     for (var i = 0; i < data.length; i++) {
-      $('.score1').append(data[i].id);
+      $('.score1').append(listItem(data[i],"User: "));
     }
   });
 

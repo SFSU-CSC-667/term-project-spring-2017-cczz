@@ -107,22 +107,6 @@ $(document).ready(function () {
   context.canvas.width = $(window).width();
   context.canvas.height = $(window).height();
 
-
-
-  /*Locate card and nameplate*/
-  //drawNamePlate(context,namePlatePos[0].x, namePlatePos[0].y, "Me", "1000");
-  //drawCard(context,2,cardPos[0].x,cardPos[0].y);
-  //drawCard(context,1,cardPos[0].x+100,cardPos[0].y);
-  //
-  //drawOpponentPlate(context, namePlatePos[1].x, namePlatePos[1].y,"Tommyy","900");
-  //drawBlindCards(context,cardPos[1].x,cardPos[1].y);
-  //
-  //drawOpponentPlate(context, namePlatePos[2].x, namePlatePos[2].y,"Tom","900");
-  //drawBlindCards(context,cardPos[2].x,cardPos[2].y);
-  //
-  //drawOpponentPlate(context, namePlatePos[3].x, namePlatePos[3].y,"TommyT","900");
-  //drawBlindCards(context,cardPos[3].x,cardPos[3].y);
-
   /*Distribute public cards*/
   //drawCard(context,41,pubCardsPos[0].x,pubCardsPos[0].y);
   //drawCard(context,42,pubCardsPos[1].x,pubCardsPos[1].y);
@@ -154,6 +138,12 @@ $(document).ready(function () {
     return false; // prevent refresh
   });
 
-
+  ///*clear all cookies when closing window*/
+  //$(window).unload(function() {
+  //  var cookies = $.cookie();
+  //  for(var cookie in cookies) {
+  //    $.removeCookie(cookie);
+  //  }
+  //});
 
 });

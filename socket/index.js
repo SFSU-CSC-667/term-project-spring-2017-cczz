@@ -19,7 +19,7 @@ const init = function (app, server) {
       // console.log(data.roomid);
       socket.join(data.roomid);
       io.sockets.in(data.roomid).emit('room-message-display', data); 
-      console.log(data.data);
+      // console.log(data.data);
     }); 
 
     socket.on(USER_JOINED, function (data) {

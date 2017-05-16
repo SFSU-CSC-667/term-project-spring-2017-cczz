@@ -9,6 +9,10 @@ body {
     padding-top: 50px;
 }
 
+.list-group {
+    min-height: 300px;
+}
+
 .list-group-item {
     word-wrap: break-word;
     font-family: monospace, serif;

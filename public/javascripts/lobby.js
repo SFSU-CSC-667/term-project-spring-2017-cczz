@@ -1,5 +1,7 @@
 const ROOM_ID = 'room-id';
 const USER_JOINED = "user-joined";
+const ROOM_CREATED = "room-created";
+
 var socket = io();
 
 const listItem = function (data) {
@@ -35,6 +37,16 @@ $(document).ready(function () {
   $('#chat-board button').click(function () {
     const message = $('.form-control').val();
     socket.emit('message', {data: message});
+  });
+
+  /*Operation on create room*/
+  $(".creat-new-room").on("submit",function() {
+    socket.emit(ROOM_CREATED,{roomid:1});
+  });
+
+  socket.on(ROOM_CREATED,function(data){
+    $.cookie(ROOM_ID, 1, {path: "/"});
+    window.location = "/game";
   });
 
   /*Operation on join room*/

@@ -39,13 +39,13 @@ $(document).ready(function () {
     socket.emit('message', {data: message});
   });
 
-  /*Operation on create room*/
+  /*Operation on create room, send to create room then store roomid that in cookie*/
   $(".creat-new-room").on("submit",function() {
-    socket.emit(ROOM_CREATED,{roomid:1});
+    socket.emit(ROOM_CREATED,{userid:1});
   });
 
   socket.on(ROOM_CREATED,function(data){
-    $.cookie(ROOM_ID, 1, {path: "/"});
+    $.cookie(ROOM_ID, data, {path: "/"});
     window.location = "/game";
   });
 

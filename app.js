@@ -41,27 +41,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: "Secret Key!", cookie: {secure: false}})); //todo check
-app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 60000 }})); //todo check
+app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 600000 }})); //todo check
 
 app.use('/', index);
-app.use('/login', login);
+app.use('/api/login', login);
 app.use('/api/auth', auth);
+app.use('/api/register', register);
 
 app.use(function (req, res, next) {
   if (!req.session.user_id) {
-      res.redirect('/login');
+      res.redirect('/api/login');
     } else {
       next();
     }
 });
 
-app.use('/lobby', lobby);
-app.use('/game', game);
+app.use('/api/lobby', lobby);
+app.use('/api/game', game);
 app.use('/api/users', users);
 app.use('/api/rooms', rooms);
 app.use('/api/userprofile', userprofile);
-app.use('/api/register', register);
 app.use('/api/rounds', rounds);
 app.use('/api/messages', messages);
 

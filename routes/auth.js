@@ -11,12 +11,12 @@ router.post( '/', function( request, response, next ) {
 	    request.session.user_id = data.email;
 	    response.cookie('email', data.email);
 	    response.cookie('user_id', data.id);
-      response.redirect('/lobby');
+      response.redirect('/api/lobby');
   	})
   	.catch( function( error ) {
   	  console.log( error );
   	  //alert("no matched email and password");
-  	  response.redirect('/login');
+  	  response.redirect('/api/login');
   	  response.status( 200 ).send( "no matched email and password" );
 
   	})

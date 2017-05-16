@@ -5,7 +5,7 @@ var db = require('../model');
 
 /* GET home page. */
 router.get('/', function (request, response) {
-  response.redirect('/login');
+  response.redirect('/api/login');
 
 });
 

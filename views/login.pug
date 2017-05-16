@@ -4,7 +4,7 @@ extends layout
 block content
   .main.container
     .row.text-center.bottom-buffer
-       img(src='images/logo.jpg' style='width:30%; margin-top:80px').img-circle
+       img(src='../images/logo.jpg' style='width:30%; margin-top:80px').img-circle
     .row
       br
       .col-md-4.col-md-offset-4.text-center.bottom-buffer
@@ -15,3 +15,5 @@ block content
             input.form-control(type='password', id='password', placeholder='Password', name='password')
           button.btn.btn-primary(type='submit') Log in
           br
+          br
+        a(href='/api/register') New User? Sign up here!

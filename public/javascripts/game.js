@@ -117,7 +117,7 @@ $(document).ready(function () {
   /*User Join room*/
   var roomid = $.cookie(ROOM_ID);
   socket.emit(USER_JOINED, {roomid: roomid});
-
+ 
   socket.on(USER_JOINED, function (data) {
     /*Draw me*/
     drawNamePlate(context,namePlatePos[0].x, namePlatePos[0].y, "Me", "1000");
@@ -138,6 +138,29 @@ $(document).ready(function () {
     return false; // prevent refresh
   });
 
+  /* Room message posted */
+  $('#chat-input button').click(function () {
+    const message = $('.room-form-control').val();
+    // console.log(message);
+    // var username = $.cookie(username); 
+    socket.emit('room-message', {roomid: roomid}); 
+    socket.emit('room-message', {data: message});
+  });
+
+  //socket on the game page
+  var username = $.cookie('email');
+  // console.log(username);
+  socket.on('room-message-display', function (data) {
+    $('div#room-chat-board').append('<div>').append(data.data);
+    // alert(data.data);
+    // alert(data.roomid);
+  });
+
+  //Clear input after submission
+  $('button.btn.btn-default').click(function(){
+    $('input.room-form-control').val(''); 
+  });
+
   ///*clear all cookies when closing window*/
   //$(window).unload(function() {
   //  var cookies = $.cookie();
@@ -145,5 +168,4 @@ $(document).ready(function () {
   //    $.removeCookie(cookie);
   //  }
   //});
-
 });

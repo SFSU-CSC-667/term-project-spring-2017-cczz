@@ -65,3 +65,50 @@ CREATE TABLE messages
   room_id  INT references rooms(id) ON DELETE CASCADE
 ); 
 
+DROP TABLE IF EXISTS roomplayers CASCADE; 
+CREATE TYPE STATE AS ENUM ('fold', 'call', 'check', 'raise');
+CREATE TABLE roomplayers
+(
+  user_id INT references users(id), 
+  room_id INT references rooms(id), 
+  round_id  INT DEFAULT 1, 
+  position_id INT DEFAULT 1, 
+  bet INT DEFAULT 10, 
+  state STATE DEFAULT 'check', 
+  is_fold boolean  DEFAULT TRUE, 
+  PRIMARY KEY (user_id, room_id)
+); 
+
+DROP TABLE IF EXISTS roundcards DROP TABLE IF EXISTS roomplayers; 
+CREATE TYPE STATE AS ENUM ('fold', 'call', 'check', 'raise');
+CREATE TABLE roomplayers
+(
+  user_id INT references users(id), 
+  room_id INT references rooms(id), 
+  round_id  INT DEFAULT 1, 
+  position_id INT DEFAULT 1, 
+  bet INT DEFAULT 10, 
+  state STATE DEFAULT 'check', 
+  is_fold boolean  DEFAULT TRUE, 
+  PRIMARY KEY (user_id, room_id)
+); 
+
+DROP TABLE IF EXISTS roundcards; 
+CREATE TABLE roundcards
+(
+  id SERIAL PRIMARY KEY,
+  round_id INT DEFAULT 1  references rounds(id),
+  card_id INT  DEFAULT 1, 
+  user_id INT  DEFAULT 0  references users(id), 
+  is_faceup    DEFAULT FALSE boolean 
+);
+; 
+CREATE TABLE roundcards
+(
+  id SERIAL PRIMARY KEY,
+  round_id INT DEFAULT 1  references rounds(id),
+  card_id INT  DEFAULT 1, 
+  user_id INT  DEFAULT 0  references users(id), 
+  is_faceup    DEFAULT FALSE boolean 
+);
+

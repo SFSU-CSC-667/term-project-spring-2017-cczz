@@ -15,9 +15,12 @@ html(lang='en')
   body
     div#canvas-container
       canvas#game-room Browser does not support Canvas!
-    div#user-update
+    div#room-chat-board
       
-
+      
+    div#chat-input
+      input.room-form-control(type='text', placeholder='Message...')
+      button.btn.btn-default(type='button') Send
 
 
     script(src='https://code.jquery.com/jquery-3.1.1.min.js',

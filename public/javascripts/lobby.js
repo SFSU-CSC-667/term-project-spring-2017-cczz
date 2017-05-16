@@ -36,6 +36,7 @@ $(document).ready(function () {
   /*Operation for chatting button*/
   $('#chat-board button').click(function () {
     const message = $('.form-control').val();
+    // console.log(message);
     socket.emit('message', {data: message});
   });
 
@@ -54,8 +55,14 @@ $(document).ready(function () {
     $.cookie(ROOM_ID, $(this).attr("data-roomid"), {path: "/"});
   });
 
+  //reset the input area after message submission
+  $('button.btn.btn-default').click(function(){
+    $('input.form-control').val(''); 
+  });
+
   //socket on the lobby page
   socket.on('message-display', function (data) {
-    $('div.message-board').append(data);
+    console.log(data);
+    $('div.display-message').append('<div>').append(data.data);
   });
 });

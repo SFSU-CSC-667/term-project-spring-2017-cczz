@@ -65,4 +65,13 @@ $(document).ready(function () {
     console.log(data);
     $('div.display-message').append('<div>').append(data.data);
   });
+
+
+  ///*clear all cookies when closing window*/
+  //$(window).unload(function() {
+  //  var cookies = $.cookie();
+  //  for(var cookie in cookies) {
+  //    $.removeCookie(cookie);
+  //  }
+  //});
 });

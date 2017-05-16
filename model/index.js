@@ -49,6 +49,15 @@ module.exports = {
     return db.one('SELECT * FROM rooms WHERE id = $1', id); 
   },
 
+  createRoom: function(dealer_pid, small_blind) {
+  	return db.one('INSERT INTO rooms(dealer_pid, small_blind) VALUES ($1, $2) RETURNING id', [dealer_pid, small_blind]);
+  },
+
+  // WARNING: THIS METHOD MAY NEED TO BE CHANGED. PAY ATTENTION WHEN USING IT. PLEASE DON'T FORGET TO CLEAN IT UP BEFORE STARTING THE NEXT ROUNDS.
+  createRoomPlayers: function(user_id, room_id, round_id, position_id, bet, state, is_fold) {
+  	return db.none ('INSERT INTO roomplayers(user_id, room_id, round_id, position_id, bet, state, is_fold) VALUES ($1, $2, $3, $4, $5, $6, $7)', [user_id, room_id, round_id, position_id, bet, state, is_fold]);
+  },
+
   updateRoomById: function(id, numOfPlayer) {
     return db.any('UPDATE rooms SET player_amount = $1 WHERE id = $2', numOfPlayer, id); 
   },

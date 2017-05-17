@@ -67,11 +67,12 @@ $(document).ready(function () {
   });
 
 
-  ///*clear all cookies when closing window*/
-  //$(window).unload(function() {
-  //  var cookies = $.cookie();
-  //  for(var cookie in cookies) {
-  //    $.removeCookie(cookie);
-  //  }
-  //});
+  /* clear all cookies when closing the window */
+  $(window).on("beforeunload", function(e) {
+      var cookies = $.cookie();
+      for(var cookie in cookies) {
+         $.removeCookie(cookie);
+      }
+      alert("remove cookie");
+  });
 });

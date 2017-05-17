@@ -59,16 +59,21 @@ div.score-group {
     font-size: 20px;
 }
 
-div#room-chat-board {
-    position: relative;
-    left: 900px;    
-    bottom: 635px;
-    background-color: red;
+/*Chat-board in the lobby*/
+#chat-board {
+    position: fixed;
+    overflow: auto; 
+    margin-left: 800px;
+    max-height: 500px
 }
 
-div#chat-input{
+/*Chat-board in the game room*/
+div#room-chat {
     position: relative;
-    left: 900px;
-    bottom: 130px; 
-    background-color: blue;
+    margin-left: 900px; 
+    overflow: auto;   
+    bottom: 635px;
+    max-height: 400px;
+    width: 320px;
+    background-color: green;
 }

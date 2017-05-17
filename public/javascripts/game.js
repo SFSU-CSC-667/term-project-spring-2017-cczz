@@ -156,8 +156,6 @@ $(document).ready(function () {
   // console.log(username);
   socket.on('room-message-display', function (data) {
     $('div#room-chat-board').append('<div>').append(data.data);
-    // alert(data.data);
-    // alert(data.roomid);
   });
 
   //Clear input after submission

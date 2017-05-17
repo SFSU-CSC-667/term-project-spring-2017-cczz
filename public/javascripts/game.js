@@ -87,6 +87,7 @@ const createInputButton = function (src) {
     type: 'image',
     class: 'game-button',
     src: src
+   
   });
 
   const form = $('<form>').attr({
@@ -97,6 +98,16 @@ const createInputButton = function (src) {
 
   return form[0];
 };
+
+const createSingleButton = function(src, classname) {
+  const button = $('<input>').attr({
+    type: 'image',
+    class: classname,
+    src: src
+  });
+  return button;
+
+}
 
 
 $(document).ready(function () {
@@ -137,9 +148,12 @@ $(document).ready(function () {
 
   /*User action buttons*/
   $('#canvas-container').append(createInputButton('/images/call.png'));
+  $('.game-form').append(createSingleButton('/images/button_fold.png', 'game-button'));
+  $('.game-form').append(createSingleButton('/images/button_raise.png', 'game-button'));
+  $('#canvas-container').append(createSingleButton('/images/button_play.png', 'start-button'));
   $('.game-form').on("submit", function () {
     socket.emit('message', {data: "helslo world1"});
-    return false; // prevent refresh
+    return false; // prevent refres
   });
 
   /* Room message posted */

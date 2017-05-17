@@ -23,6 +23,7 @@ var login = require('./routes/login');
 var lobby = require('./routes/lobby');
 var game = require('./routes/game');
 var messages = require('./routes/messages');
+var logout = require('./routes/logout');
 
 
 var app = express();
@@ -63,7 +64,7 @@ app.use('/api/rooms', rooms);
 app.use('/userprofile', userprofile);
 app.use('/api/rounds', rounds);
 app.use('/api/messages', messages);
-
+app.use('/logout', logout);
 
 
 // catch 404 and forward to error handler

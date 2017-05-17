@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 60000 }})); //todo check
+app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: {expires: new Date(253402300000000)}})); //set the cookie expires date to 31 Dec 9999
 
 app.use('/', index);
 app.use('/login', login);
@@ -59,7 +59,6 @@ app.use(function (req, res, next) {
 
 app.use('/lobby', lobby);
 app.use('/game', game);
-
 app.use('/api/rooms', rooms);
 app.use('/userprofile', userprofile);
 app.use('/api/rounds', rounds);

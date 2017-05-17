@@ -6,7 +6,7 @@ router.get('/', function (request, response) {
   if (!request.session.user_id) { //not login
     response.render('login');
   } else {
-    response.render('lobby');
+    response.redirect('/lobby');
   }
 });
 

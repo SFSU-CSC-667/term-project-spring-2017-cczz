@@ -8,6 +8,7 @@ router.get('/', function (request, response) {
   });
   response.clearCookie("email");
   response.clearCookie("user_id");
+  response.clearCookie("username");
   response.redirect('/login');
 });
 

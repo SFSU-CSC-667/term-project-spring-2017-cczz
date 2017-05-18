@@ -16,7 +16,6 @@ router.post( '/', function( request, response, next ) {
   	})
   	.catch( function( error ) {
   	  console.log( error );
-  	  //alert("no matched email and password");
   	  response.redirect('/login');
 
   	})

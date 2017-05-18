@@ -101,7 +101,6 @@ const createInputButton = function (src) {
 
 $(document).ready(function () {
 
-
   var gameroomcanvas = $("#game-room");
   var context = gameroomcanvas[0].getContext("2d");
   context.canvas.width = $(window).width();

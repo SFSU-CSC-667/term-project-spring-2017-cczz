@@ -59,7 +59,6 @@ app.use(function (req, res, next) {
 
 app.use('/lobby', lobby);
 app.use('/game', game);
-
 app.use('/api/rooms', rooms);
 app.use('/userprofile', userprofile);
 app.use('/api/rounds', rounds);

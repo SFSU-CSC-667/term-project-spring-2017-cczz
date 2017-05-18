@@ -23,6 +23,7 @@ var login = require('./routes/login');
 var lobby = require('./routes/lobby');
 var game = require('./routes/game');
 var messages = require('./routes/messages');
+var logout = require('./routes/logout');
 
 
 var app = express();
@@ -41,7 +42,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: { maxAge: 60000 }})); //todo check
+app.use(session({resave:true, saveUninitialized:true, secret: 'SECRET',cookie: {expires: new Date(253402300000000)}})); //set the cookie expires date to 31 Dec 9999
 
 app.use('/', index);
 app.use('/login', login);
@@ -63,7 +64,7 @@ app.use('/api/rooms', rooms);
 app.use('/userprofile', userprofile);
 app.use('/api/rounds', rounds);
 app.use('/api/messages', messages);
-
+app.use('/logout', logout);
 
 
 // catch 404 and forward to error handler

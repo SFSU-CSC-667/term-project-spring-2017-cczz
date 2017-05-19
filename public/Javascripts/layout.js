@@ -1,7 +1,11 @@
 $(document).ready( function() {
 	if ($.cookie('email') == null) {
-		$('#navbar1').hide()
 	} else {
-		$('#navbar1').show()
+		$('.navbar-header').append($('<a>', {'class': 'navbar-brand', 'href': '/api/users/' + $.cookie('username'), html: function() {
+			return $.cookie('username')
+		}}))
+
+		$('.navbar-header').append($('<a>', {'class': 'navbar-brand', 'href': '/logout', html: 'Sign Out'
+		}))
 	}
 })

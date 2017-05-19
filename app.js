@@ -15,7 +15,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var rooms = require('./routes/rooms');
-var userprofile = require('./routes/userprofile');
+//var userprofile = require('./routes/userprofile');
 var register = require('./routes/register');
 var rounds = require('./routes/rounds');
 var auth = require('./routes/auth');
@@ -24,6 +24,7 @@ var lobby = require('./routes/lobby');
 var game = require('./routes/game');
 var messages = require('./routes/messages');
 var logout = require('./routes/logout');
+var rule = require('./routes/rule');
 
 
 var app = express();
@@ -49,6 +50,7 @@ app.use('/login', login);
 app.use('/api/auth', auth);
 app.use('/register', register);
 app.use('/api/users', users);
+app.use('/rule', rule);
 
 app.use(function (req, res, next) {
   if (!req.session.user_id) {
@@ -61,7 +63,7 @@ app.use(function (req, res, next) {
 app.use('/lobby', lobby);
 app.use('/game', game);
 app.use('/api/rooms', rooms);
-app.use('/userprofile', userprofile);
+//app.use('/userprofile', userprofile);
 app.use('/api/rounds', rounds);
 app.use('/api/messages', messages);
 app.use('/logout', logout);

@@ -18,8 +18,8 @@ module.exports = {
     return db.one('SELECT * FROM users WHERE id = $1', id);
   },
 
-  getUserByUsername: function (email) {
-    return db.one('SELECT * FROM users WHERE username = $1', email);
+  getUserByUsername: function (username) {
+    return db.one('SELECT * FROM users WHERE username = $1', username);
   },
 
   getUserByEmail: function (email) {

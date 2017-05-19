@@ -30,6 +30,12 @@ $(document).ready(function () {
     }
   });
 
+  // $.get("/api/roundCards", function(data, status){
+  //   console.log(data.bar[0]);
+  //   $('.score1').append(data.bar[0]);
+
+  // })
+
 
   /*Operation for chatting button*/
   $('#chat-board button').click(function () {

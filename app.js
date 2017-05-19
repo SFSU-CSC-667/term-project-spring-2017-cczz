@@ -23,6 +23,7 @@ var login = require('./routes/login');
 var lobby = require('./routes/lobby');
 var game = require('./routes/game');
 var messages = require('./routes/messages');
+var roundCards = require('./routes/roundCards'); 
 
 
 var app = express();
@@ -48,6 +49,7 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/api/auth', auth);
 
+
 app.use(function (req, res, next) {
   if (!req.session.user_id) {
       res.redirect('/login');
@@ -64,7 +66,7 @@ app.use('/api/userprofile', userprofile);
 app.use('/api/register', register);
 app.use('/api/rounds', rounds);
 app.use('/api/messages', messages);
-
+app.use('/api/roundCards', roundCards); 
 
 
 // catch 404 and forward to error handler

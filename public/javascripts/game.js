@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 5/5/2017.
  */
+
 const USER_JOINED = "user-joined";
 const ROOM_ID = 'room-id';
 const namePlatePos = [{x:370,y:540},{x:20,y:360},{x:370,y:175},{x:720,y:360}];
@@ -109,6 +110,24 @@ const createSingleButton = function(src, classname) {
 
 }
 
+//Shuffle cards
+function shuffle(array){
+  var currentIndex = array.length, temporaryValue, randomIndex; 
+
+  //while there remain elements to shuffle
+  while(0 !== currentIndex){
+    //pick a remaining element
+    randomIndex = Math.floor(Math.random() * currentIndex); 
+    currentIndex -= 1;
+
+    //Swap it with the current element
+    temporaryValue = array[currentIndex]; 
+    array[currentIndex] = array[randomIndex]; 
+    array[randomIndex] = temporaryValue; 
+  }
+  return array; 
+}
+
 
 $(document).ready(function () {
 
@@ -166,8 +185,6 @@ $(document).ready(function () {
   });
 
   //socket on the game page
-  var username = $.cookie('email');
-  // console.log(username);
   socket.on('room-message-display', function (data) {
     $('div#room-chat-board').append('<div>').append(data.data);
   });
@@ -176,6 +193,22 @@ $(document).ready(function () {
   $('button.btn.btn-default').click(function(){
     $('input.room-form-control').val(''); 
   });
+
+  //socket on the start_game button
+  $('.start-button').click(function(){   
+    socket.emit('start_game', {roomid:roomid}); 
+  }); 
+  
+
+
+  //Get all 52 cards
+  // $.get("/api/roundCards", function(data, status){
+  //   // console.log(data.cards);
+  //   //Shuffle the 52 cards
+  //   var cards = data.cards; 
+  //   cards = shuffle(cards); 
+  //   // console.log(cards); 
+  // })
   
 
 

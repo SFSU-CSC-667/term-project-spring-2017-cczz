@@ -37,7 +37,7 @@ CREATE TABLE rounds
   all_bet INT  DEFAULT 5    NOT NULL, 
   current_bet  INT  DEFAULT  1  NOT NULL, 
   next_player  INT  DEFAULT  1  NOT NULL, 
-  active_player_number  INT NOT NULL
+  active_player_number  INT DEFAULT 1 NOT NULL
 ); 
 
 DROP TABLE IF EXISTS messages CASCADE;
@@ -84,16 +84,17 @@ CREATE TABLE roundcards
   id SERIAL PRIMARY KEY,
   round_id INT DEFAULT 1  references rounds(id),
   card_id INT  DEFAULT 1, 
-  user_id INT  DEFAULT 0  references users(id), 
-  is_faceup    DEFAULT FALSE boolean 
+  user_id VARCHAR(255), 
+  is_faceup  boolean   DEFAULT FALSE 
 );
-; 
-CREATE TABLE roundcards
-(
-  id SERIAL PRIMARY KEY,
-  round_id INT DEFAULT 1  references rounds(id),
-  card_id INT  DEFAULT 1, 
-  user_id INT  DEFAULT 0  references users(id), 
-  is_faceup    DEFAULT FALSE boolean 
+
+DROP TABLE IF EXISTS card_deck; 
+CREATE TABLE card_deck
+( 
+  id SERIAL, 
+  room_id INT DEFAULT 1,
+  round_id INT DEFAULT 1, 
+  cards int[] default '{}' , 
+  PRIMARY KEY (room_id, round_id)
 );
 

@@ -33,6 +33,22 @@ module.exports = {
         'VALUES (${username}, ${email}, ${password})', req.body);
   },
 
+  createDeck: function(room_id, round_id, cards){
+     return db.none( 'INSERT INTO card_deck(room_id,round_id, cards)' + 'VALUES ($1, $2, $3)', [room_id,round_id, cards] );
+  },
+
+  createRound: function(room_id){
+    return db.none('INSERT INTO rounds(room_id)' + 'VALUES($1)', room_id);
+  },
+
+  createRoundCard: function(card_id){
+    return db.none('INSERT INTO roundCards(card_id)' + 'VALUES($1)', card_id);
+  },
+
+  getRoundCards: function(round_id){
+    return db.any('SELECT * FROM roundCards WHERE round_id = $1', round_id);
+  },
+
   verifyUserByEmailAndPassword: function ( email, password ) {
     return db.one( 'SELECT * FROM users WHERE email = $1 AND password = $2', [email, password] );
   },
@@ -60,6 +76,11 @@ module.exports = {
 
   getRoundById: function(id) {
     return db.one( 'SELECT * FROM rounds WHERE id = $1', id );
+  },
+
+  /*Card_deck currently return one record*/
+  getAllCards: function(){
+    return db.one('SELECT * FROM card_deck'); 
   }
 
 };

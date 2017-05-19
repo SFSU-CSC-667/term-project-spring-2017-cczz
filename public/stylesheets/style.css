@@ -26,18 +26,18 @@ body {
     margin-top: -100px;
 }
 
+.game-button.resize(){
+    width: 150px;
+    height: auto;
+}
+
 
 .start-button{
     margin-left: 50px;
     margin-top: -150px;
-    width: 250px;
+    width: 200px;
     height: auto;
 }
-
-/*.start-button{
-    width: 250px;
-    height: auto;
-}*/
 
 
 .plain-button {

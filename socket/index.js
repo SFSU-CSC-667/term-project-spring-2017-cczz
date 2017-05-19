@@ -18,12 +18,12 @@ const init = function (app, server) {
     });
 
     /*socket on the message from the room*/
-    socket.on('room-message', function(data){
-      // console.log(data.roomid);
+    socket.on('room-message', function (data) {
+      //console.log(data.roomid);
       socket.join(data.roomid);
-      io.sockets.in(data.roomid).emit('room-message-display', data); 
+      io.sockets.in(data.roomid).emit('room-message-display', data);
       // console.log(data.data);
-    }); 
+    });
 
     /*For room created, work with lobby.js */
     socket.on(ROOM_CREATED, function (data) {
@@ -36,12 +36,17 @@ const init = function (app, server) {
 
     /*For user join, work with game.js*/
     socket.on(USER_JOINED, function (data) {
-      //console.log(data.roomid);
+      var userid = data.userid;
+      var roomid = data.roomid;
+
       socket.join(data.roomid);
+
       db.getRoomById(data.roomid).then(function (data) {
         db.updateRoomById(data.id, data.player_amount + 1).then(function (data) {
-          //console.log("id:" + data.id + ";players:" + data.player_amount);
-          io.sockets.in(data.id).emit(USER_JOINED, {roomid:data.id,playerAmount:data.player_amount});
+          db.createRoomPlayers(userid, data.id, data.player_amount).then(function (data) {
+            //console.log("user joined id:" + userid + "roomid:" + roomid);
+            io.sockets.in(roomid).emit(USER_JOINED, {roomid: roomid, userid: userid, positionid: data});
+          });
         });
       });
     });

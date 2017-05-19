@@ -24,7 +24,6 @@ module.exports = {
 
   getUserByEmail: function (email) {
     var data = db.one('SELECT * FROM users WHERE email = $1', email);
-    console.log(data);
     return data;
   },
 
@@ -52,13 +51,20 @@ module.exports = {
     return db.one('INSERT INTO rooms(dealer_pid, small_blind) VALUES ($1, $2) RETURNING id', [dealer_pid, small_blind]);
   },
 
-  // WARNING: THIS METHOD MAY NEED TO BE CHANGED. PAY ATTENTION WHEN USING IT. PLEASE DON'T FORGET TO CLEAN IT UP BEFORE STARTING THE NEXT ROUNDS.
-  createRoomPlayers: function (user_id, room_id, round_id, position_id, bet, state, is_fold) {
-    return db.none('INSERT INTO roomplayers(user_id, room_id, round_id, position_id, bet, state, is_fold) VALUES ($1, $2, $3, $4, $5, $6, $7)', [user_id, room_id, round_id, position_id, bet, state, is_fold]);
-  },
-
   updateRoomById: function (id, numOfPlayer) {
     return db.one('UPDATE rooms SET player_amount = $2 WHERE id = $1 RETURNING id, player_amount', [id, numOfPlayer]);
+  },
+
+  /*Roomplayers*/
+  createRoomPlayers: function (user_id, room_id, position_id) {
+    return db.one('INSERT INTO roomplayers(user_id, room_id, position_id) VALUES ($1, $2, $3) RETURNING position_id', [user_id, room_id, position_id]);
+  },
+  getRoomPlayerByID: function (userid) {
+    return db.any('SELECT * FROM roomplayers WHERE user_id = $1', userid);
+  },
+
+  getRoomPlayerByRoomID: function (roomid) {
+    return db.any('SELECT * FROM roomplayers WHERE room_id = $1', roomid);
   },
 
   /* ROUNDS */

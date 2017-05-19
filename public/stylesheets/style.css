@@ -48,8 +48,8 @@ body {
 }
 
 canvas {
-   /* height: 80vh;
-    width: 80vw;*/
+    /* height: 80vh;
+     width: 80vw;*/
     position: relative;
     display: block;
 }
@@ -58,24 +58,31 @@ a {
     /*color: #00B7FF;*/
 }
 
-div.score-group {
+.scoreboard {
     font-size: 20px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.display-message{
+    height: 300px;
+    overflow: auto;
 }
 
 .all-rooms li {
     font-size: 20px;
 }
 
-div#room-chat-board {
+#room-chat-board {
     position: relative;
-    left: 900px;    
+    left: 900px;
     bottom: 635px;
     background-color: red;
 }
 
-div#chat-input{
+#chat-input {
     position: relative;
     left: 900px;
-    bottom: 130px; 
+    bottom: 130px;
     background-color: blue;
 }

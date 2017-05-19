@@ -1,6 +1,8 @@
 const ROOM_ID = 'room-id';
 const USER_JOINED = "user-joined";
 const ROOM_CREATED = "room-created";
+const USER_ID = 'user_id';
+const ROOMS_IN = 'rooms_in';
 
 var socket = io();
 
@@ -20,6 +22,8 @@ const listItem = function (data, title) {
 
 $(document).ready(function () {
   /*Fill the score board and room board*/
+  var userid = $.cookie(USER_ID);
+
   $.get("/api/rooms", function (data, status) {
     for (var i = 0; i < data.length; i++) {
       $('#rooms').append(listItem(data[i], "Room: "));
@@ -28,10 +32,17 @@ $(document).ready(function () {
 
   $.get("/api/users", function (data, status) {
     for (var i = 0; i < data.length; i++) {
-      $('.score1').append(listItem(data[i], "User: "));
+      $('.scoreboard').append(listItem(data[i], "User: "));
     }
   });
 
+  $.get("/api/roomplayers/" + userid, function (data, status) {
+    var inRooms = [];
+    for (var i = 0; i < data.length; i++) {
+      inRooms.push(data[i].room_id);
+    }
+    $.cookie(ROOMS_IN, JSON.stringify(inRooms), {path: "/"});
+  });
 
   /*Operation for chatting button*/
   $('#chat-board button').click(function () {
@@ -68,11 +79,11 @@ $(document).ready(function () {
 
 
   /* clear all cookies ans session when closing the window */
-  $(window).on("beforeunload", function(e) {
-      $.get("/logout", function (data, status) {}); //destroy session
-      var cookies = $.cookie();
-      for(var cookie in cookies) {
-          $.removeCookie(cookie);
-      }
-  });
+  //$(window).on("beforeunload", function(e) {
+  //    $.get("/logout", function (data, status) {}); //destroy session
+  //    var cookies = $.cookie();
+  //    for(var cookie in cookies) {
+  //        $.removeCookie(cookie);
+  //    }
+  //});
 });

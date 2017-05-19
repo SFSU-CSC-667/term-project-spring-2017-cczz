@@ -17,7 +17,7 @@ var cn = {
     password: '123456'
 };
 
-var db = pgp(cn);
+var db = pgp(process.env.DATABASE_URL || cn);
 
 module.exports = db;
 

@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h2
+  .container.lobby-body
+    .row
+      #ranking-board.col-md-4
+        h3 Score Board
+        .scoreboard
+
+      #game-room.col-md-4
+        h3 Game Board
+        #rooms.list-group
+
+
+      #chat-board.col-md-4
+        h3 Chat Board
+        div.display-message.well.well-sm
+           
+        .input-group
+           input.form-control(type='text', placeholder='Message...')
+           button.btn.btn-primary(type='button') Send
+
+    .row
+        .col-md-4.text-center.bottom-buffer
+        form.creat-new-room
+            button.btn.btn-primary(type='submit') Create New

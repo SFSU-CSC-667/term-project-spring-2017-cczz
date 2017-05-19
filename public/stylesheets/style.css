@@ -1,23 +1,40 @@
 body {
     width: 100%;
     height: 100%;
-    /*padding: 50px;*/
-    font: 40px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
     /*background-color: lightblue;*/
 }
 
+.lobby-body {
+    padding-top: 50px;
+}
+
+.list-group {
+    /*height: 400px;*/
+    /*min-height: 300px;*/
+    max-height: 400px;
+    overflow: auto;
+}
+
+.list-group-item {
+    word-wrap: break-word;
+    font-family: monospace, serif;
+}
+
 #canvas-container {
+    position: relative;
     background-image: url("../images/gametable.jpg");
 }
 
 .game-button {
     position: fixed;
     top: 100px;
-    right: 10px;
+    left: 100px;
     margin: 0;
     padding: 0;
     border: 0;
-    width: 150px;
+    width: 100px;
+
 }
 
 .plain-button {
@@ -31,20 +48,41 @@ body {
 }
 
 canvas {
-    /*height: 100vh;*/
-    /*width: 100vw;*/
+    /* height: 80vh;
+     width: 80vw;*/
     position: relative;
     display: block;
 }
 
 a {
-    color: #00B7FF;
+    /*color: #00B7FF;*/
 }
 
-div.score-group {
+.scoreboard {
     font-size: 20px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.display-message{
+    height: 300px;
+    overflow: auto;
 }
 
 .all-rooms li {
     font-size: 20px;
+}
+
+#room-chat-board {
+    position: relative;
+    left: 900px;
+    bottom: 635px;
+    background-color: red;
+}
+
+#chat-input {
+    position: relative;
+    left: 900px;
+    bottom: 130px;
+    background-color: blue;
 }

@@ -57,7 +57,6 @@ const init = function (app, server) {
       db.getRoomById(data.roomid).then(function (data) {
         db.updateRoomById(data.id, data.player_amount + 1).then(function (data) {
           db.createRoomPlayers(userid, data.id, username, data.player_amount).then(function (data) {
-            //console.log("user joined id:" + userid + "roomid:" + roomid);
             io.sockets.in(roomid).emit(USER_JOINED, {roomid: roomid, userid: userid, positionid: data});
           });
         });

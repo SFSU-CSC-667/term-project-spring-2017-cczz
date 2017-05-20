@@ -5,17 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// var passport = require('passport'); 
-// var LocalStrategy = require('passport-local').Strategy; 
-// var flash = require('connect-flash'); 
-var session = require('express-session'); 
-// require('./auth/passport.js')(passport);
+var session = require('express-session');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
 var rooms = require('./routes/rooms');
-//var userprofile = require('./routes/userprofile');
 var register = require('./routes/register');
 var rounds = require('./routes/rounds');
 var auth = require('./routes/auth');

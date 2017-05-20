@@ -21,6 +21,19 @@ const listItem = function (data, title) {
 
 
 $(document).ready(function () {
+  /*Display the username and "Signout" on navbar*/
+  if ($.cookie('email') != null) {
+    $('.navbar-header').append($('<a>', {
+      'class': 'navbar-brand', 'href': '/api/users/userprofile/' + $.cookie('username'), html: function () {
+        return $.cookie('username')
+      }
+    }));
+
+    $('.navbar-header').append($('<a>', {
+      'class': 'navbar-brand', 'href': '/logout', html: 'Sign Out'
+    }))
+  }
+
   /*Fill the score board and room board*/
   var userid = $.cookie(USER_ID);
 

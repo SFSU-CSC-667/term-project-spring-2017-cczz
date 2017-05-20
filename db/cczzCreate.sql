@@ -58,9 +58,9 @@ DROP TABLE IF EXISTS roundcards;
 CREATE TABLE roundcards
 (
   id SERIAL PRIMARY KEY,
-  round_id INT DEFAULT 1  references rounds(id),
-  card_id INT  DEFAULT 1, 
-  user_id INT  DEFAULT 0  references users(id)
+  round_id INT references rounds(id),
+  card_id INT,
+  user_id INT
 );
 
 DROP TABLE IF EXISTS messages CASCADE;

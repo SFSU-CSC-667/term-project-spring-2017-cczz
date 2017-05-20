@@ -6,10 +6,6 @@ var db = require('../db');
 module.exports = {
 
   /* USERS */
-  //createUser: function(){
-  //  return db.one('INSERT INTO users VALUES (username, email, password)');
-  //},
-
   getAllUsers: function () {
     return db.any('SELECT * FROM users');
   },
@@ -73,7 +69,14 @@ module.exports = {
 
   getRoundById: function (id) {
     return db.one('SELECT * FROM rounds WHERE id = $1', id);
-  }
+  },
+
+  createRound: function(room_id){
+    return db.one('INSERT INTO rounds(room_id)' + 'VALUES($1) RETURNING id', room_id);
+  },
+
+  /*RoundCards & Deck*/
+
 
 };
 

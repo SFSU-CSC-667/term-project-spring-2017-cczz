@@ -3,6 +3,7 @@ const USER_JOINED = "user-joined";
 const ROOM_CREATED = "room-created";
 const START_GAME = 'start-game';
 const USER_RETURN = 'user_return';
+const USER_NAME = 'username';
 var cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52];
 
 const socketIo = require('socket.io');
@@ -36,26 +37,26 @@ const init = function (app, server) {
     /*For room created, work with lobby.js */
     socket.on(ROOM_CREATED, function (data) {
       db.createRoom(1, 100).then(function (data) {
-        //console.log(data.id);
         socket.emit(ROOM_CREATED, data.id);
 
       });
     });
 
     /*For user join/return, work with game.js*/
-    socket.on(USER_RETURN,function(data){
+    socket.on(USER_RETURN, function (data) {
       socket.join(data.roomid);
     });
 
     socket.on(USER_JOINED, function (data) {
       var userid = data.userid;
       var roomid = data.roomid;
+      var username = data.username;
 
       socket.join(data.roomid);
 
       db.getRoomById(data.roomid).then(function (data) {
         db.updateRoomById(data.id, data.player_amount + 1).then(function (data) {
-          db.createRoomPlayers(userid, data.id, data.player_amount).then(function (data) {
+          db.createRoomPlayers(userid, data.id, username, data.player_amount).then(function (data) {
             //console.log("user joined id:" + userid + "roomid:" + roomid);
             io.sockets.in(roomid).emit(USER_JOINED, {roomid: roomid, userid: userid, positionid: data});
           });
@@ -68,7 +69,7 @@ const init = function (app, server) {
       console.log(data.roomid);
       var roomid = data.roomid;
       var shuffleCards = shuffle(cards);
-      var cardsInRounds = shuffleCards.slice(0,20); // only need the first 13 cards for judging
+      var cardsInRounds = shuffleCards.slice(0, 20); // only need the first 13 cards for judging
       console.log(cardsInRounds);
       io.sockets.in(data.roomid).emit(START_GAME, {cards: cardsInRounds});
     });

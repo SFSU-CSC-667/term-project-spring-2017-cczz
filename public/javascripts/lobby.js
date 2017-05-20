@@ -3,6 +3,7 @@ const USER_JOINED = "user-joined";
 const ROOM_CREATED = "room-created";
 const USER_ID = 'user_id';
 const ROOMS_IN = 'rooms_in';
+const USER_NAME = 'username';
 
 var socket = io();
 

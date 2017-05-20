@@ -7,6 +7,7 @@ const USER_ID = 'user_id';
 const ROOMS_IN = 'rooms_in';
 const START_GAME = 'start-game';
 const USER_RETURN = 'user_return';
+const USER_NAME = 'username';
 
 const namePlatePos = [{x: 370, y: 540}, {x: 20, y: 360}, {x: 370, y: 175}, {x: 720, y: 360}];
 const cardPos = [{x: 360, y: 410}, {x: 50, y: 190}, {x: 400, y: 5}, {x: 750, y: 190}];
@@ -78,13 +79,9 @@ const drawUserPlateByPosID = function (context, userid, roomid) {
       }
       console.log("now process @pos: " + canvasposition);
       if (canvasposition == 0) {
-        drawNamePlate(context, namePlatePos[0].x, namePlatePos[0].y, "Me", "100");
+        drawNamePlate(context, namePlatePos[0].x, namePlatePos[0].y, "Me", "100"); //draw me plate
       } else {
-        var canvaspos = canvasposition;
-        console.log("@Canvaspos"+canvaspos);
-        $.get("/api/users/"+data[j].user_id,function(data){
-          drawOpponentPlate(context, namePlatePos[canvaspos].x, namePlatePos[canvaspos].y, data.username, data.money);
-        });
+        drawOpponentPlate(context, namePlatePos[canvasposition].x, namePlatePos[canvasposition].y, data[j].username, "100");
       }
     }
   });
@@ -133,6 +130,7 @@ $(document).ready(function () {
   /*User Join  or Rreturn room*/
   var roomid = parseInt($.cookie(ROOM_ID));
   var userid = parseInt($.cookie(USER_ID));
+  var username = $.cookie(USER_NAME);
   var inRooms = JSON.parse($.cookie(ROOMS_IN));
 
   //console.log(JSON.stringify(inRooms));
@@ -147,7 +145,7 @@ $(document).ready(function () {
 
   if (!returnGame) {
     console.log("new game");
-    socket.emit(USER_JOINED, {userid: userid, roomid: roomid});
+    socket.emit(USER_JOINED, {userid: userid, roomid: roomid,username:username});
     inRooms.push(roomid);
     $.cookie(ROOMS_IN, JSON.stringify(inRooms), {path: "/"});
   }

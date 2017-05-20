@@ -10,4 +10,4 @@ Team: CCZZ
 - Lijie Zhou
 
 ## `Host`
-https://caezar.herokuapp.com (https://caezar.herokuapp.com)
+https://caezar.herokuapp.com 

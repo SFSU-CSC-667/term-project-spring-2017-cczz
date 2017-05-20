@@ -81,6 +81,7 @@ const drawUserPlateByPosID = function (context, userid, roomid) {
         drawNamePlate(context, namePlatePos[0].x, namePlatePos[0].y, "Me", "100");
       } else {
         var canvaspos = canvasposition;
+        console.log("@Canvaspos"+canvaspos);
         $.get("/api/users/"+data[j].user_id,function(data){
           drawOpponentPlate(context, namePlatePos[canvaspos].x, namePlatePos[canvaspos].y, data.username, data.money);
         });

@@ -11,11 +11,11 @@ router.get('/', function (request, response) {
 
 
 /* GET a specific user id */
-/*router.get('/:id', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
   db.getUserById(parseInt(req.params.id)).then(function (data) {
     res.status(200).send(data);
   })
-});*/
+});
 
 
 /* create a user */
@@ -27,15 +27,9 @@ router.post('/', function (req, res, next) {
 });
 
 /* GET a specific userprofile by username */
-router.get('/:username', function (req, res, next) {
+router.get('/userprofile/:username', function (req, res, next) {
   db.getUserByUsername(req.params.username).then(function (data) {
-    //res.status(200).send(data)
-    //var email = data.email
-    //console.log(email)
     res.render('userProfile', {userData: data})
-    //console.log(data.username)
-    //var user = data.username
-    //res.render('userprofile', {username: user})
   })
 });
 

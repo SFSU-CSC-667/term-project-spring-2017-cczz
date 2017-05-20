@@ -78,9 +78,12 @@ const drawUserPlateByPosID = function (context, userid, roomid) {
       }
       console.log("now process @pos: " + canvasposition);
       if (canvasposition == 0) {
-        drawNamePlate(context, namePlatePos[0].x, namePlatePos[0].y, "Me", "1000");
+        drawNamePlate(context, namePlatePos[0].x, namePlatePos[0].y, "Me", "100");
       } else {
-        drawOpponentPlate(context, namePlatePos[canvasposition].x, namePlatePos[canvasposition].y, "Tommyy", "900");
+        var canvaspos = canvasposition;
+        $.get("/api/users/"+data[j].user_id,function(data){
+          drawOpponentPlate(context, namePlatePos[canvaspos].x, namePlatePos[canvaspos].y, data.username, data.money);
+        });
       }
     }
   });
@@ -126,17 +129,7 @@ $(document).ready(function () {
   context.canvas.width = $(window).width();
   context.canvas.height = $(window).height();
 
-  /*Distribute public cards*/
-  //drawCard(context, 2, cardPos[0].x, cardPos[0].y);
-  //drawBlindCards(context, cardPos[i].x, cardPos[i].y);
-  //drawCard(context, 1, cardPos[0].x + 100, cardPos[0].y);
-  //drawCard(context,41,pubCardsPos[0].x,pubCardsPos[0].y);
-  //drawCard(context,42,pubCardsPos[1].x,pubCardsPos[1].y);
-  //drawCard(context,43,pubCardsPos[2].x,pubCardsPos[2].y);
-  //drawCard(context,44,pubCardsPos[3].x,pubCardsPos[3].y);
-  //drawCard(context,45,pubCardsPos[4].x,pubCardsPos[4].y);
-
-  /*User Join  / Rreturn room*/
+  /*User Join  or Rreturn room*/
   var roomid = parseInt($.cookie(ROOM_ID));
   var userid = parseInt($.cookie(USER_ID));
   var inRooms = JSON.parse($.cookie(ROOMS_IN));
@@ -162,7 +155,7 @@ $(document).ready(function () {
     drawUserPlateByPosID(context, userid, roomid);
   });
 
-  /*User action buttons*/
+  /*User Action buttons*/
   $('.buttons-container').append(createInputButton('/images/button_play.png', 'start_game'));
   $('.buttons-container').append(createInputButton('/images/call.png', 'call'));
   $('.buttons-container').append(createInputButton('/images/button_fold.png', 'fold'));

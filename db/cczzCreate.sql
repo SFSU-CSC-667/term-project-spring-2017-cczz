@@ -36,7 +36,7 @@ CREATE TABLE roomplayers
   user_id INT references users(id) ON DELETE CASCADE NOT NULL,
   room_id INT references rooms(id) ON DELETE CASCADE NOT NULL,
   round_id  INT DEFAULT 0 NOT NULL,
-  username VARCHAR(255)       NOT NULL,
+  username VARCHAR(255)  NOT NULL,
   position_id INT NOT NULL CHECK (position_id >= 1 AND position_id <= 4),
   bet INT DEFAULT 10, 
   state STATE DEFAULT 'check', 

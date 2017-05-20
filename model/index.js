@@ -52,7 +52,7 @@ module.exports = {
 
   /*Roomplayers*/
   createRoomPlayers: function (user_id, room_id, user_name, position_id) {
-    return db.one('INSERT INTO roomplayers(user_id, room_id, username,position_id) VALUES ($1, $2, $3, $4) RETURNING position_id', [user_id, room_id, user_name, position_id]);
+    return db.one('INSERT INTO roomplayers(user_id, room_id, username, position_id) VALUES ($1, $2, $3, $4) RETURNING position_id', [user_id, room_id, user_name, position_id]);
   },
   getRoomPlayerByID: function (userid) {
     return db.any('SELECT * FROM roomplayers WHERE user_id = $1', userid);

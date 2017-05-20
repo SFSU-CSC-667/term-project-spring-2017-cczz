@@ -143,9 +143,10 @@ $(document).ready(function () {
     drawUserPlateByPosID(context, userid, roomid);
   }
 
+  /*New game join*/
   if (!returnGame) {
     console.log("new game");
-    socket.emit(USER_JOINED, {userid: userid, roomid: roomid,username:username});
+    socket.emit(USER_JOINED, {userid: userid, roomid: roomid, username: username});
     inRooms.push(roomid);
     $.cookie(ROOMS_IN, JSON.stringify(inRooms), {path: "/"});
   }

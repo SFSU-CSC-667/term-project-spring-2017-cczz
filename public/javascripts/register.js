@@ -1,17 +1,8 @@
-$(document).ready( function() {
-	$('#registerButton').click( function(data) {
-		var $password = $('#password').val()
-		var $confirmPassword = $('#confirmPassword').val();
-		if ($password !== $confirmPassword) {
-			if (alert("The confirm Password you input is not the same as Password!")) {}
-			else location.reload('localhost:3000/api/register')
-		}
-
-	})
-})
-
-
-
-
-
-
+function validateRegisterForm() {
+  var password = document.forms["register"]["password"].value;
+  var confirmPassword = document.forms["register"]["confirmPassword"].value;
+  if (password !== confirmPassword) {
+	alert("The confirm Password you input is not the same as Password!");
+	return false;
+  }
+}

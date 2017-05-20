@@ -5,22 +5,16 @@ const USER_JOINED = "user-joined";
 const ROOM_ID = 'room-id';
 const USER_ID = 'user_id';
 const ROOMS_IN = 'rooms_in';
+const START_GAME = 'start-game';
+const USER_RETURN = 'user_return';
+
 const namePlatePos = [{x: 370, y: 540}, {x: 20, y: 360}, {x: 370, y: 175}, {x: 720, y: 360}];
 const cardPos = [{x: 360, y: 410}, {x: 50, y: 190}, {x: 400, y: 5}, {x: 750, y: 190}];
 const pubCardsPos = [{x: 220, y: 240}, {x: 320, y: 240}, {x: 420, y: 240}, {x: 520, y: 240}, {x: 620, y: 240}];
 
 var socket = io();
 var returnGame = false;
-
-//const tableInit = function (context) {
-//  var img = new Image();
-//  img.src = "/images/gametable.jpg";
-//  img.onload = function () {
-//    context.beginPath();
-//    context.fillStyle = context.createPattern(img, "repeat");
-//    context.fillRect(0, 0, $(window).width(), $(window).height())
-//  };
-//};  //deprecated
+var pos_id = 0;
 
 const drawURLImg = function (context, src, posX, posY, scale) {
   var img = new Image();
@@ -69,6 +63,29 @@ const drawOpponentPlate = function (context, posX, posY, name, money) {
   img.src = imgSrc;
 };
 
+const drawUserPlateByPosID = function (context, userid, roomid) {
+  $.get("/api/roomplayers/roomid/" + roomid, function (data, status) {
+    for (var i in data) {
+      if (userid == data[i].user_id) {
+        pos_id = data[i].position_id;
+      }
+    }
+    console.log("@pos: " + pos_id);
+    for (var j in data) {
+      var canvasposition = data[j].position_id - pos_id;
+      if (canvasposition < 0) {
+        canvasposition += 4;
+      }
+      console.log("now process @pos: " + canvasposition);
+      if (canvasposition == 0) {
+        drawNamePlate(context, namePlatePos[0].x, namePlatePos[0].y, "Me", "1000");
+      } else {
+        drawOpponentPlate(context, namePlatePos[canvasposition].x, namePlatePos[canvasposition].y, "Tommyy", "900");
+      }
+    }
+  });
+};
+
 const drawCard = function (context, cardNum, posX, posY) {
   if (cardNum === 0 || cardNum == 0) {
     var imageSrc = "/images/card_back.gif";
@@ -85,7 +102,7 @@ const drawBlindCards = function (context, posX, posY) {
   drawCard(context, 0, posX - 10, posY + 30);
 };
 
-const createInputButton = function (src) {
+const createInputButton = function (src, id) {
   const button = $('<input>').attr({
     type: 'image',
     class: 'game-button',
@@ -93,7 +110,7 @@ const createInputButton = function (src) {
   });
 
   const form = $('<form>').attr({
-    id: 'new game',
+    id: id,
     class: 'game-form'
   });
   form.append(button);
@@ -101,30 +118,6 @@ const createInputButton = function (src) {
   return form[0];
 };
 
-
-const drawUserPlateByPosID = function (context,userid,roomid){
-  $.get("/api/roomplayers/roomid/" + roomid, function (data, status) {
-    var pos_id = 0;
-    for (var i in data) {
-      if (userid == data[i].user_id) {
-        pos_id = data[i].position_id;
-      }
-    }
-    console.log("@pos: "+pos_id);
-    for (var j in data) {
-      var canvasposition = data[j].position_id - pos_id;
-      if(canvasposition < 0 ){
-        canvasposition +=4;
-      }
-      console.log("now process @pos: "+canvasposition);
-      if(canvasposition == 0){
-        drawNamePlate(context, namePlatePos[0].x, namePlatePos[0].y, "Me", "1000");
-      }else {
-        drawOpponentPlate(context, namePlatePos[canvasposition].x, namePlatePos[canvasposition].y, "Tommyy", "900");
-      }
-    }
-  });
-};
 
 $(document).ready(function () {
 
@@ -143,18 +136,19 @@ $(document).ready(function () {
   //drawCard(context,44,pubCardsPos[3].x,pubCardsPos[3].y);
   //drawCard(context,45,pubCardsPos[4].x,pubCardsPos[4].y);
 
-  /*User Join room*/
+  /*User Join  / Rreturn room*/
   var roomid = parseInt($.cookie(ROOM_ID));
   var userid = parseInt($.cookie(USER_ID));
   var inRooms = JSON.parse($.cookie(ROOMS_IN));
 
-  console.log(JSON.stringify(inRooms));
-  console.log(roomid);
+  //console.log(JSON.stringify(inRooms));
+  //console.log(roomid);
 
   if ($.inArray(roomid, inRooms) > -1) {
     console.log("return game");
     returnGame = true;
-    drawUserPlateByPosID(context,userid,roomid);
+    socket.emit(USER_RETURN,{roomid:roomid});
+    drawUserPlateByPosID(context, userid, roomid);
   }
 
   if (!returnGame) {
@@ -165,29 +159,37 @@ $(document).ready(function () {
   }
 
   socket.on(USER_JOINED, function (data) {
-    /*Redraw the table*/
-    drawUserPlateByPosID(context,userid,roomid);
-
-    //drawNamePlate(context, namePlatePos[0].x, namePlatePos[0].y, "Me", "1000");
-    //
-    ///*Draw others*/
-    //for (var i = 1; i < data.playerAmount; i++) {
-    //  drawOpponentPlate(context, namePlatePos[i].x, namePlatePos[i].y, "Tommyy", "900");
-    //}
+    drawUserPlateByPosID(context, userid, roomid);
   });
 
   /*User action buttons*/
-  $('#canvas-container').append(createInputButton('/images/call.png'));
-  $('.game-form').on("submit", function () {
-    socket.emit('message', {data: "helslo world1"});
+  $('.buttons-container').append(createInputButton('/images/button_play.png', 'start_game'));
+  $('.buttons-container').append(createInputButton('/images/call.png', 'call'));
+  $('.buttons-container').append(createInputButton('/images/button_fold.png', 'fold'));
+  $('.buttons-container').append(createInputButton('/images/button_check.png', 'check'));
+
+  $('#start_game').on("submit", function () {
+    socket.emit(START_GAME, {roomid: roomid});
     return false; // prevent refresh
   });
 
-  /* Room message posted */
+  socket.on(START_GAME, function (data) {
+    console.log(JSON.stringify(data.cards));
+    drawCard(context, data.cards[(pos_id-1)*2], cardPos[0].x, cardPos[0].y);
+    drawCard(context, data.cards[(pos_id-1)*2+1], cardPos[0].x + 100, cardPos[0].y);
+    drawBlindCards(context, cardPos[1].x, cardPos[1].y);
+    drawBlindCards(context, cardPos[2].x, cardPos[2].y);
+    drawBlindCards(context, cardPos[3].x, cardPos[3].y);
+    for(var m = 8; m <13; m++){
+      drawCard(context,data.cards[m],pubCardsPos[m-8].x,pubCardsPos[m-8].y);
+    }
+  });
+
+  /* Room message */
   $('#chat-input button').click(function () {
     const message = $('.room-form-control').val();
     // console.log(message);
-    // var username = $.cookie(username); 
+    // var username = $.cookie(username);
     socket.emit('room-message', {roomid: roomid});
     socket.emit('room-message', {data: message});
   });
@@ -197,8 +199,6 @@ $(document).ready(function () {
   // console.log(username);
   socket.on('room-message-display', function (data) {
     $('div#room-chat-board').append('<div>').append(data.data);
-    // alert(data.data);
-    // alert(data.roomid);
   });
 
   //Clear input after submission
@@ -206,11 +206,4 @@ $(document).ready(function () {
     $('input.room-form-control').val('');
   });
 
-  ///*clear all cookies when closing window*/
-  //$(window).unload(function() {
-  //  var cookies = $.cookie();
-  //  for(var cookie in cookies) {
-  //    $.removeCookie(cookie);
-  //  }
-  //});
 });
